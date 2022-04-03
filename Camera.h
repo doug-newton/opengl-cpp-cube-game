@@ -29,6 +29,7 @@ public:
 	void moveRight(float deltaTime);
 	void turn(float xoffset, float yoffset);
 
+	const glm::vec3& getPosition();
 	glm::mat4 getViewMatrix();
 
 };

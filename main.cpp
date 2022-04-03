@@ -84,7 +84,7 @@ int main()
 		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 
-		glm::vec3 lightPos(-3.0f,  0.0f, -3.0f);
+		glm::vec3 lightPos(-3.0f,  5.0f, -3.0f);
 		glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
 		glm::mat4 lightModel = glm::mat4(1.0f);
@@ -101,14 +101,17 @@ int main()
 		modelLocation = glGetUniformLocation(lightingProgram, "model");
 		viewLocation = glGetUniformLocation(lightingProgram, "view");
 		projectionLocation = glGetUniformLocation(lightingProgram, "projection");
-		int lightColorLocation = glGetUniformLocation(lightingProgram, "lightColor");
 		objectColorLocation = glGetUniformLocation(lightingProgram, "objectColor");
+		int lightColorLocation = glGetUniformLocation(lightingProgram, "lightColor");
 		int lightPosLocation = glGetUniformLocation(lightingProgram, "lightPos");
+		int viewPosLocation = glGetUniformLocation(lightingProgram, "viewPos");
 
 		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 		glUniform3f(lightPosLocation, lightPos.x, lightPos.y, lightPos.z);
 		glUniform3f(lightColorLocation, lightColor.x, lightColor.y, lightColor.z);
+		glm::vec3 viewPos = Camera::get().getPosition();
+		glUniform3f(viewPosLocation, viewPos.x, viewPos.y, viewPos.z);
 		glCheckError();
 
 		glBindVertexArray(vao);

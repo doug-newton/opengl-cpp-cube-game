@@ -59,6 +59,10 @@ void Camera::turn(float xoffset, float yoffset) {
     front = glm::normalize(direction);
 }
 
+const glm::vec3& Camera::getPosition() {
+    return pos;
+}
+
 glm::mat4 Camera::getViewMatrix()
 {
 	return glm::lookAt(pos, pos + front, up);
