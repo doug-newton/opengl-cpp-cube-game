@@ -27,9 +27,6 @@
     <ClCompile Include="vaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shaders.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="callbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +42,27 @@
     <ClCompile Include="FPS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\shaders\lighting\lighting_shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\lighting\shader_light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\lighting\shader_material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\simple\simple_shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\shader_compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\simple\simple_shader_src.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -54,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vaos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="callbacks.h">
@@ -69,6 +84,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shaders\lighting\lighting_shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shaders\lighting\shader_light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shaders\lighting\shader_material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shaders\simple\simple_shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shaders\shader_compiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
