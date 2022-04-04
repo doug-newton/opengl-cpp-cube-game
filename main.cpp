@@ -13,7 +13,13 @@
 #include "FPS.h"
 #include "Camera.h"
 
-int main()
+int glMain();
+
+int main() {
+	return glMain();
+}
+
+int glMain()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -102,17 +108,33 @@ int main()
 		viewLocation = glGetUniformLocation(lightingProgram, "view");
 		projectionLocation = glGetUniformLocation(lightingProgram, "projection");
 		objectColorLocation = glGetUniformLocation(lightingProgram, "objectColor");
-		int lightColorLocation = glGetUniformLocation(lightingProgram, "lightColor");
-		int lightPosLocation = glGetUniformLocation(lightingProgram, "lightPos");
 		int viewPosLocation = glGetUniformLocation(lightingProgram, "viewPos");
+
+		int lightPositionLocation = glGetUniformLocation(lightingProgram, "light.position");
+		int lightAmbientLocation = glGetUniformLocation(lightingProgram, "light.ambient");
+		int lightDiffuseLocation = glGetUniformLocation(lightingProgram, "light.diffuse");
+		int lightSpecularLocation = glGetUniformLocation(lightingProgram, "light.specular");
+
+		int materialAmbientLocation = glGetUniformLocation(lightingProgram, "material.ambient");
+		int materialDiffuseLocation = glGetUniformLocation(lightingProgram, "material.diffuse");
+		int materialSpecularLocation = glGetUniformLocation(lightingProgram, "material.specular");
+		int materialShininessLocation = glGetUniformLocation(lightingProgram, "material.shininess");
+
+		glUniform3f(materialAmbientLocation, 1.0f, 0.5f, 0.31f);
+		glUniform3f(materialDiffuseLocation, 1.0f, 0.5f, 0.31f);
+		glUniform3f(materialSpecularLocation, 0.5f, 0.5f, 0.9f);
+		glUniform1f(materialShininessLocation, 32.0f);
 
 		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
-		glUniform3f(lightPosLocation, lightPos.x, lightPos.y, lightPos.z);
-		glUniform3f(lightColorLocation, lightColor.x, lightColor.y, lightColor.z);
+
 		glm::vec3 viewPos = Camera::get().getPosition();
 		glUniform3f(viewPosLocation, viewPos.x, viewPos.y, viewPos.z);
-		glCheckError();
+
+		glUniform3f(lightPositionLocation, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(lightAmbientLocation, 0.2f, 0.2f, 0.2f);
+		glUniform3f(lightDiffuseLocation, 0.5f, 0.5f, 0.5f);
+		glUniform3f(lightSpecularLocation, 1.0f, 1.0f, 1.0f);
 
 		glBindVertexArray(vao);
 		for (int i = 0; i < sizeof(positions) / sizeof(float) / 3; i++) {
