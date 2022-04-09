@@ -23,9 +23,6 @@ class Game: Entity {
 
 	std::vector<Entity*> entities;
 
-	GLuint texture0 = loadJpg("container.jpg");
-	GLuint texture1 = loadPng("awesomeface.png");
-
 public:
 
 	static Game* instance;

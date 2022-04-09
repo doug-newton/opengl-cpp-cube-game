@@ -7,8 +7,6 @@ Game::Game()
 	:
 	entities(0),
 	window(nullptr),
-	texture0(0),
-	texture1(0),
 	camera(nullptr),
 	light(nullptr),
 	block(nullptr),
@@ -55,9 +53,6 @@ bool Game::init() {
 	addEntity(camera);
 	addEntity(light);
 	addEntity(block);
-
-	texture0 = loadJpg("container.jpg");
-	texture1 = loadPng("awesomeface.png");
 
 	bool ok = true;
 
@@ -112,13 +107,17 @@ void Game::handleMouse(double xpos, double ypos) {
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
 void Game::addEntity(Entity* entity) {
 	entities.push_back(entity);
 }
+
+//	---------------------------------	//
+//	----------- CALLBACKS -----------	//
+//	---------------------------------	//
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 void Game::setCallbacks() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
