@@ -27,9 +27,6 @@
     <ClCompile Include="vaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="callbacks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gl_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +60,15 @@
     <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -72,9 +78,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vaos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="callbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gl_util.h">
@@ -99,6 +102,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\shaders\shader_compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

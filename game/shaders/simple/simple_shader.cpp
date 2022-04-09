@@ -12,6 +12,10 @@ SimpleShader::SimpleShader() {
 	objectColorLocation = glGetUniformLocation(this->id, "objectColor");
 }
 
+SimpleShader::~SimpleShader() {
+	glDeleteProgram(id);
+}
+
 void SimpleShader::use() {
 	glUseProgram(this->id);
 }

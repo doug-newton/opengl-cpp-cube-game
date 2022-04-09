@@ -16,6 +16,7 @@ private:
 public:
 
 	SimpleShader();
+	~SimpleShader();
 
 	void use();
 

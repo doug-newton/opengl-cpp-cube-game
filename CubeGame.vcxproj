@@ -142,9 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FPS.cpp" />
+    <ClCompile Include="game\entity.cpp" />
+    <ClCompile Include="game\game.cpp" />
+    <ClCompile Include="game\renderer.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp" />
     <ClCompile Include="game\shaders\shader_compiler.cpp" />
@@ -160,9 +162,11 @@
     <ClCompile Include="vaos.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="callbacks.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FPS.h" />
+    <ClInclude Include="game\entity.h" />
+    <ClInclude Include="game\game.h" />
+    <ClInclude Include="game\renderer.h" />
     <ClInclude Include="game\shaders\lighting\lighting_shader.h" />
     <ClInclude Include="game\shaders\shader_compiler.h" />
     <ClInclude Include="game\shaders\simple\simple_shader.h" />

@@ -2,8 +2,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "game/entity.h"
 
-class Camera
+class Camera: public Entity
 {
 	static float speed;
 	static float sensitivity;
@@ -15,19 +16,25 @@ class Camera
 	float yaw;
 	float pitch;
 
-	Camera(const Camera&) = delete;
-	Camera& operator = (const Camera& c) = delete;
+	bool movingForwards;
+	bool movingBackwards;
+	bool movingLeft;
+	bool movingRight;
 
-	Camera();
-	static Camera instance;
+	void turn(float xoffset, float yoffset);
 
 public:
-	static Camera& get();
+	Camera();
+
 	void moveForwards(float deltaTime);
 	void moveBackwards(float deltaTime);
 	void moveLeft(float deltaTime);
 	void moveRight(float deltaTime);
-	void turn(float xoffset, float yoffset);
+
+	void handleKeyboard(int key, int scancode, int action, int mods);
+	void handleMouse(double xpos, double ypos);
+
+	void update(float deltaTime);
 
 	const glm::vec3& getPosition();
 	glm::mat4 getViewMatrix();

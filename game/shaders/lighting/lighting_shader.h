@@ -17,6 +17,7 @@ class LightingShader {
 public:
 
 	LightingShader();
+	~LightingShader();
 
 	void use();
 

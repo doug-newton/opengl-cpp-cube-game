@@ -22,6 +22,9 @@ LightingShader::LightingShader() {
 	viewPosLocation = glGetUniformLocation(this->id, "viewPos");
 }
 
+LightingShader::~LightingShader() {
+	glDeleteProgram(id);
+}
 
 void LightingShader::use() {
 	glUseProgram(this->id);
