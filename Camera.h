@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "game/entity.h"
+#include "game/entities/entity.h"
 
 class Camera: public Entity
 {

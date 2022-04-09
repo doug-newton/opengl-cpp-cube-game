@@ -9,22 +9,10 @@ Game::Game()
 	window(nullptr),
 	texture0(0),
 	texture1(0),
-	vao(0),
-	lightVao(0),
 	camera(nullptr),
-	material(
-		glm::vec3(1.0f, 0.5f, 0.31f),
-		glm::vec3(1.0f, 0.5f, 0.31f),
-		glm::vec3(0.5f, 0.5f, 0.9f),
-		32.0f),
-	light(
-		glm::vec3(-3.0f, 5.0f, -3.0f),
-		glm::vec3(0.2f, 0.2f, 0.2f),
-		glm::vec3(0.5f, 0.5f, 0.5f),
-		glm::vec3(1.0f, 1.0f, 1.0f)
-	),
-	projection(glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f)),
-	position(0.0f, 0.0f, -3.0f)
+	light(nullptr),
+	block(nullptr),
+	projection(glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f))
 {
 	if (instance != nullptr)
 		throw "Game can only be instantiated once";
@@ -61,13 +49,15 @@ bool Game::init() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	camera = new Camera;
+	light = new Light;
+	block = new Block;
 
 	addEntity(camera);
+	addEntity(light);
+	addEntity(block);
 
 	texture0 = loadJpg("container.jpg");
 	texture1 = loadPng("awesomeface.png");
-	vao = createCubeWithNormals();
-	lightVao = createLightVao();
 
 	bool ok = true;
 
@@ -83,44 +73,19 @@ void Game::render() {
 
 	glm::mat4 view = camera->getViewMatrix();
 
-	//	for the light itself, use the simple shader (don't apply lighting to it)
-
 	Renderer::instance().getSimpleShader()->use();
 	Renderer::instance().getSimpleShader()->setProjection(projection);
 	Renderer::instance().getSimpleShader()->setView(view);
 
-	glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
-	glm::mat4 lightModel = glm::mat4(1.0f);
-	lightModel = glm::translate(lightModel, light.position);
-	lightModel = glm::scale(lightModel, glm::vec3(0.2f));
-
-	Renderer::instance().getSimpleShader()->setObjectColor(lightColor);
-
-	glBindVertexArray(lightVao);
-	Renderer::instance().getSimpleShader()->setModel(lightModel);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		(*it)->render();
-	}
-
-	//	for the rest of the objects, use the lighting shader (apply lighting)
-
 	Renderer::instance().getLightingShader()->use();
-	Renderer::instance().getLightingShader()->setLight(light);
+	Renderer::instance().getLightingShader()->setLight(light->getShaderLight());
 	Renderer::instance().getLightingShader()->setProjection(projection);
 	Renderer::instance().getLightingShader()->setView(view);
 	Renderer::instance().getLightingShader()->setViewPos(camera->getPosition());
 
-	//	draw all entities except the light
-
-	Renderer::instance().getLightingShader()->setMaterial(material);
-	glBindVertexArray(vao);
-	glm::mat4 transform = glm::mat4(1.0f);
-	transform = glm::translate(transform, position);
-	transform = glm::scale(transform, glm::vec3(3.0f, 3.0f, 3.0f));
-	Renderer::instance().getLightingShader()->setModel(transform);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	for (auto it = entities.begin(); it != entities.end(); it++) {
+		(*it)->render();
+	}
 }
 
 Game::~Game() {

@@ -1,5 +1,5 @@
 #pragma once
-#include "entity.h"
+#include "entities/entity.h"
 #include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -16,17 +16,15 @@
 #include "shaders/lighting/shader_light.h"
 #include "shaders/lighting/shader_material.h"
 
+#include "entities/light.h"
+#include "entities/block.h"
+
 class Game: Entity {
 
 	std::vector<Entity*> entities;
 
 	GLuint texture0 = loadJpg("container.jpg");
 	GLuint texture1 = loadPng("awesomeface.png");
-	GLuint vao = createCubeWithNormals();
-	GLuint lightVao = createLightVao();
-
-	ShaderMaterial material;
-	ShaderLight light;
 
 public:
 
@@ -35,9 +33,10 @@ public:
 	GLFWwindow* window;
 
 	glm::mat4 projection;
-	glm::vec3 position;
 
 	Camera* camera;
+	Light* light;
+	Block* block;
 
 	Game();
 	~Game();
