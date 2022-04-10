@@ -45,7 +45,7 @@ bool Game::init() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	camera = new Camera(width, height);
-	light = new Light(0, 5, 0);
+	light = new Light(0, 15, 0);
 
 	addEntity(camera);
 	addEntity(light);

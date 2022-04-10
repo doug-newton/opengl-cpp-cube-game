@@ -22,10 +22,10 @@ void Light::render() {
 
 	glm::mat4 lightModel = glm::mat4(1.0f);
 	lightModel = glm::translate(lightModel, shaderLight.position);
-	lightModel = glm::scale(lightModel, glm::vec3(0.2f));
+	lightModel = glm::scale(lightModel, glm::vec3(2.0f));
 
 	Renderer::instance().getSimpleShader()->use();
-	Renderer::instance().getSimpleShader()->setObjectColor(shaderLight.ambient);
+	Renderer::instance().getSimpleShader()->setObjectColor(glm::vec3(1,1,1));
 
 	glBindVertexArray(vao);
 	Renderer::instance().getSimpleShader()->setModel(lightModel);
