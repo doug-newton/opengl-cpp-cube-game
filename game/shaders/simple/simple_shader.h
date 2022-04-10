@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
 #include "../shader_compiler.h"
+#include "../../entities/camera.h"
 
 class SimpleShader {
 
@@ -19,14 +20,11 @@ public:
 	~SimpleShader();
 
 	void use();
-
 	void setModel(const glm::mat4& model);
-
 	void setView(const glm::mat4& view);
-
 	void setProjection(const glm::mat4& projection);
-
 	void setObjectColor(const glm::vec3& objectColor);
+	void setCamera(Camera* camera);
 
 private:
 	GLuint id;

@@ -35,3 +35,8 @@ void SimpleShader::setProjection(const glm::mat4& projection) {
 void SimpleShader::setObjectColor(const glm::vec3& objectColor) {
 	glUniform3fv(objectColorLocation, 1, glm::value_ptr(objectColor));
 }
+
+void SimpleShader::setCamera(Camera* camera) {
+	setProjection(camera->getProjectionMatrix());
+	setView(camera->getViewMatrix());
+}

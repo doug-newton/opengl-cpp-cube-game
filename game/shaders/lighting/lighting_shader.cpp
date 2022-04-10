@@ -79,3 +79,9 @@ void LightingShader::setTileset(GLuint texture) {
 void LightingShader::setTileIndex(int index) {
 	glUniform1i(tileIndexLocation, index);
 }
+
+void LightingShader::setCamera(Camera* camera) {
+	setProjection(camera->getProjectionMatrix());
+	setView(camera->getViewMatrix());
+	setViewPos(camera->getPosition());
+}

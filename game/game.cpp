@@ -58,16 +58,11 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Renderer::instance().getSimpleShader()->use();
-
-	Renderer::instance().getSimpleShader()->setProjection(camera->getProjectionMatrix());
-	Renderer::instance().getSimpleShader()->setView(camera->getViewMatrix());
+	Renderer::instance().getSimpleShader()->setCamera(camera);
 
 	Renderer::instance().getLightingShader()->use();
 	Renderer::instance().getLightingShader()->setLight(light->getShaderLight());
-
-	Renderer::instance().getLightingShader()->setProjection(camera->getProjectionMatrix());
-	Renderer::instance().getLightingShader()->setView(camera->getViewMatrix());
-	Renderer::instance().getLightingShader()->setViewPos(camera->getPosition());
+	Renderer::instance().getLightingShader()->setCamera(camera);
 
 	EntityGroup::render();
 }

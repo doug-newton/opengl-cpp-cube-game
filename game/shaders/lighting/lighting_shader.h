@@ -9,6 +9,7 @@
 #include "shader_light.h"
 #include "../shader_compiler.h"
 #include "../../../textures.h"
+#include "../../entities/camera.h"
 
 class LightingShader {
 
@@ -31,6 +32,8 @@ public:
 	void setViewPos(const glm::vec3& viewPos);
 	void setTileset(GLuint texture);
 	void setTileIndex(int index);
+
+	void setCamera(Camera* camera);
 
 private:
 	GLuint id;
