@@ -2,13 +2,15 @@
 #include <math.h>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "FPS.h"
+#include "../../FPS.h"
 
 float Camera::speed = 2.5f;
 float Camera::sensitivity = 0.1f;
 
-Camera::Camera()
+Camera::Camera(int windowWidth, int windowHeight)
 	:
+	windowWidth(windowWidth),
+	windowHeight(windowHeight),
 	pos(1.60671f, 3.17601f, 11.4618f),
 	front(-0.020663f, -0.161604f, -0.986639f),
 	up(0.0f, 1.0f, 0.0f),
@@ -119,6 +121,10 @@ glm::mat4 Camera::getViewMatrix()
 	return glm::lookAt(pos, pos + front, up);
 }
 
+glm::mat4 Camera::getProjectionMatrix() {
+	return glm::perspective(glm::radians(45.0f), (float)windowWidth/windowHeight, 0.1f, 100.0f);
+}
+
 void Camera::handleMouse(double xpos, double ypos) {
     static bool firstMouse = true;
     static double lastX;
@@ -138,4 +144,9 @@ void Camera::handleMouse(double xpos, double ypos) {
     lastY = ypos;
 
 	turn(xoffset, yoffset);
+}
+
+void Camera::setWindowDimensions(int w, int h) {
+	windowWidth = w;
+	windowHeight = h;
 }

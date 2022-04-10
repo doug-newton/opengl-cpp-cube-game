@@ -1,5 +1,4 @@
 #include "game.h"
-#include "../Camera.h"
 
 Game* Game::instance = nullptr;
 
@@ -8,7 +7,6 @@ Game::Game()
 	window(nullptr),
 	camera(nullptr),
 	light(nullptr),
-	projection(glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f)),
 	EntityGroup()
 {
 	if (instance != nullptr)
@@ -16,7 +14,6 @@ Game::Game()
 
 	instance = this;
 
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f);
 }
 
 bool Game::init() {
@@ -25,7 +22,10 @@ bool Game::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	window = glfwCreateWindow(600, 600, "LearnOpenGL", NULL, NULL);
+	int width = 1280;
+	int height = 960;
+
+	window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -38,13 +38,13 @@ bool Game::init() {
 		return false;
 	}
 
-	glViewport(0, 0, 600, 600);
+	glViewport(0, 0, width, height);
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	camera = new Camera;
+	camera = new Camera(width, height);
 	light = new Light(0, 5, 0);
 
 	addEntity(camera);
@@ -57,16 +57,16 @@ bool Game::init() {
 void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::mat4 view = camera->getViewMatrix();
-
 	Renderer::instance().getSimpleShader()->use();
-	Renderer::instance().getSimpleShader()->setProjection(projection);
-	Renderer::instance().getSimpleShader()->setView(view);
+
+	Renderer::instance().getSimpleShader()->setProjection(camera->getProjectionMatrix());
+	Renderer::instance().getSimpleShader()->setView(camera->getViewMatrix());
 
 	Renderer::instance().getLightingShader()->use();
 	Renderer::instance().getLightingShader()->setLight(light->getShaderLight());
-	Renderer::instance().getLightingShader()->setProjection(projection);
-	Renderer::instance().getLightingShader()->setView(view);
+
+	Renderer::instance().getLightingShader()->setProjection(camera->getProjectionMatrix());
+	Renderer::instance().getLightingShader()->setView(camera->getViewMatrix());
 	Renderer::instance().getLightingShader()->setViewPos(camera->getPosition());
 
 	EntityGroup::render();
@@ -86,7 +86,12 @@ void Game::setCallbacks() {
 	glfwSetKeyCallback(window, key_callback);
 }
 
+void Game::handleWindowSizeChange(int w, int h) {
+	camera->setWindowDimensions(w, h);
+}
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+	Game::instance->handleWindowSizeChange(width, height);
 	glViewport(0, 0, width, height);
 }
 

@@ -6,7 +6,7 @@
 #include <iostream>
 #include "../textures.h"
 #include "../vaos.h"
-#include "../Camera.h"
+#include "entities/Camera.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -25,11 +25,7 @@ class Game: public EntityGroup {
 public:
 
 	static Game* instance;
-
 	GLFWwindow* window;
-
-	glm::mat4 projection;
-
 	Camera* camera;
 	Light* light;
 
@@ -38,4 +34,6 @@ public:
 	bool init();
 	void render();
 	void setCallbacks();
+
+	void handleWindowSizeChange(int w, int h);
 };

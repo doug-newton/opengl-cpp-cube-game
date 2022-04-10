@@ -2,12 +2,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "game/entities/entity.h"
+#include "entity.h"
 
 class Camera: public Entity
 {
 	static float speed;
 	static float sensitivity;
+
+	int windowWidth;
+	int windowHeight;
 
 	glm::vec3 pos;
 	glm::vec3 front;
@@ -24,7 +27,7 @@ class Camera: public Entity
 	void turn(float xoffset, float yoffset);
 
 public:
-	Camera();
+	Camera(int windowWidth, int windowHeight);
 
 	void moveForwards(float deltaTime);
 	void moveBackwards(float deltaTime);
@@ -38,6 +41,8 @@ public:
 
 	const glm::vec3& getPosition();
 	glm::mat4 getViewMatrix();
+	glm::mat4 getProjectionMatrix();
 
+	void setWindowDimensions(int w, int h);
 };
 

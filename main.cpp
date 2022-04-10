@@ -9,7 +9,6 @@
 #include "vaos.h"
 #include "gl_util.h"
 #include "FPS.h"
-#include "Camera.h"
 #include <vector>
 #include "game/game.h"
 
