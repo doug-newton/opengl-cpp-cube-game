@@ -147,6 +147,7 @@
     <ClCompile Include="game\entities\block.cpp" />
     <ClCompile Include="game\entities\entity.cpp" />
     <ClCompile Include="game\entities\light.cpp" />
+    <ClCompile Include="game\entities\tilemap.cpp" />
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="game\renderer.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="game\entities\block.h" />
     <ClInclude Include="game\entities\entity.h" />
     <ClInclude Include="game\entities\light.h" />
+    <ClInclude Include="game\entities\tilemap.h" />
     <ClInclude Include="game\game.h" />
     <ClInclude Include="game\renderer.h" />
     <ClInclude Include="game\shaders\lighting\lighting_shader.h" />

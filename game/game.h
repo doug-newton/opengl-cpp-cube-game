@@ -18,6 +18,7 @@
 
 #include "entities/light.h"
 #include "entities/block.h"
+#include "entities/tilemap.h"
 
 class Game: Entity {
 

@@ -15,7 +15,7 @@ private:
 	GLuint vao;
 	ShaderLight shaderLight;
 public:
-	Light();
+	Light(float x, float y, float z);
 	bool init();
 	void render();
 	const ShaderLight& getShaderLight();

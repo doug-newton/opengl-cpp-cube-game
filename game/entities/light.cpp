@@ -1,10 +1,10 @@
 #include "light.h"
 
-Light::Light()
+Light::Light(float x, float y, float z)
 	:
 	vao(0),
 	shaderLight(
-		glm::vec3(-3.0f, 5.0f, -3.0f),
+		glm::vec3(x, y, z),
 		glm::vec3(0.4f, 0.4f, 0.4f),
 		glm::vec3(0.5f, 0.5f, 0.5f),
 		glm::vec3(1.0f, 1.0f, 1.0f)

@@ -46,14 +46,11 @@ bool Game::init() {
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	camera = new Camera;
-	light = new Light;
+	light = new Light(0, 5, 0);
 
 	addEntity(camera);
 	addEntity(light);
-
-	for (int i = 0; i < 4; i++) {
-		addEntity(new Block(i, i, 0, 3));
-	}
+	addEntity(new Tilemap(25, 25));
 
 	bool ok = true;
 

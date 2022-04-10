@@ -75,6 +75,9 @@
     <ClCompile Include="game\entities\block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\entities\tilemap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\entities\block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\entities\tilemap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
