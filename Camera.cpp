@@ -9,11 +9,11 @@ float Camera::sensitivity = 0.1f;
 
 Camera::Camera()
 	:
-	pos(-3.0f, 1.0f, 0.0f),
-	front(0.0f, 0.0f, -1.0f),
+	pos(1.60671f, 3.17601f, 11.4618f),
+	front(-0.020663f, -0.161604f, -0.986639f),
 	up(0.0f, 1.0f, 0.0f),
-    yaw(-90.0f),
-    pitch(0.0f),
+    yaw(-91.1998f),
+    pitch(-9.29999f),
 	movingForwards(false),
 	movingBackwards(false),
 	movingLeft(false),
@@ -61,6 +61,14 @@ void Camera::update(float deltaTime) {
 	else if (movingBackwards) moveBackwards(deltaTime);
 	if (movingLeft) moveLeft(deltaTime);
 	else if (movingRight) moveRight(deltaTime);
+
+	/*
+	std::cout 
+		<< "pos: (" << pos.x << "f, " << pos.y << "f, " << pos.z << "f), "
+		<< "front: (" << front.x << "f, " << front.y << "f, " << front.z << "f), "
+		<< "up: (" << up.x << "f, " << up.y << "f, " << up.z << "f), "
+		<< "yaw: " << yaw << "f, pitch: " << pitch << "f" << std::endl;
+	*/
 }
 
 void Camera::moveForwards(float deltaTime)

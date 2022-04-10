@@ -8,11 +8,13 @@
 #include "shader_material.h"
 #include "shader_light.h"
 #include "../shader_compiler.h"
+#include "../../../textures.h"
 
 class LightingShader {
 
 	const static std::string vertexSource;
 	const static std::string fragmentSource;
+	GLuint tileset;
 
 public:
 
@@ -22,16 +24,13 @@ public:
 	void use();
 
 	void setMaterial(const ShaderMaterial& material);
-
 	void setLight(const ShaderLight& light);
-
 	void setModel(const glm::mat4& model);
-
 	void setView(const glm::mat4& view);
-
 	void setProjection(const glm::mat4& projection);
-
 	void setViewPos(const glm::vec3& viewPos);
+	void setTileset(GLuint texture);
+	void setTileIndex(int index);
 
 private:
 	GLuint id;
@@ -50,4 +49,7 @@ private:
 	int viewLocation;
 	int projectionLocation;
 	int viewPosLocation;
+
+	int tilesetLocation;
+	int tileIndexLocation;
 };

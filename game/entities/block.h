@@ -19,9 +19,11 @@ private:
 	ShaderMaterial material;
 
 	glm::vec3 position;
+
+	int type;
 public:
 
-	Block();
+	Block(int type, float x, float y, float z);
 
 	bool init();
 	void render();

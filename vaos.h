@@ -6,4 +6,5 @@
 GLuint createTexturedQuadVao();
 GLuint createTexturedCubeWithoutEbo();
 GLuint createCubeWithNormals();
+GLuint createCubeWithNormalsAndTexCoords();
 GLuint createLightVao();

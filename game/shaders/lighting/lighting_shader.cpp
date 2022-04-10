@@ -1,6 +1,9 @@
 #include "lighting_shader.h"
 
-LightingShader::LightingShader() {
+LightingShader::LightingShader() 
+	:
+	tileset(0)
+{
 	this->id = ShaderCompiler::compileShaderProgram(
 		vertexSource.c_str(),
 		fragmentSource.c_str()
@@ -20,6 +23,13 @@ LightingShader::LightingShader() {
 	viewLocation = glGetUniformLocation(this->id, "view");
 	projectionLocation = glGetUniformLocation(this->id, "projection");
 	viewPosLocation = glGetUniformLocation(this->id, "viewPos");
+
+	tilesetLocation = glGetUniformLocation(this->id, "tileset");
+	tileIndexLocation = glGetUniformLocation(this->id, "tileIndex");
+
+	tileset = loadPng("tileset.png");
+	setTileset(tileset);
+	setTileIndex(0);
 }
 
 LightingShader::~LightingShader() {
@@ -60,3 +70,12 @@ void LightingShader::setViewPos(const glm::vec3& viewPos) {
 	glUniform3fv(viewPosLocation, 1, glm::value_ptr(viewPos));
 }
 
+void LightingShader::setTileset(GLuint texture) {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glUniform1ui(tilesetLocation, 0);
+}
+
+void LightingShader::setTileIndex(int index) {
+	glUniform1i(tileIndexLocation, index);
+}

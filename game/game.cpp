@@ -18,7 +18,6 @@ Game::Game()
 	instance = this;
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f);
-	glm::vec3 position(0.0f, 0.0f, -3.0f);
 }
 
 bool Game::init() {
@@ -48,11 +47,13 @@ bool Game::init() {
 
 	camera = new Camera;
 	light = new Light;
-	block = new Block;
 
 	addEntity(camera);
 	addEntity(light);
-	addEntity(block);
+
+	for (int i = 0; i < 4; i++) {
+		addEntity(new Block(i, i, 0, 3));
+	}
 
 	bool ok = true;
 
