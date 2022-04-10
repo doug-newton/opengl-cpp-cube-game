@@ -1,5 +1,7 @@
 #include "entity.h"
 
+Entity::Entity() {}
+Entity::~Entity() {}
 bool Entity::init() { return true; }
 void Entity::update(float deltaTime) {}
 void Entity::render() {}

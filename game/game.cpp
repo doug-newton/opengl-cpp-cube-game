@@ -5,12 +5,11 @@ Game* Game::instance = nullptr;
 
 Game::Game()
 	:
-	entities(0),
 	window(nullptr),
 	camera(nullptr),
 	light(nullptr),
-	block(nullptr),
-	projection(glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f))
+	projection(glm::perspective(glm::radians(45.0f), 600.0f / 600.0f, 0.1f, 100.0f)),
+	EntityGroup()
 {
 	if (instance != nullptr)
 		throw "Game can only be instantiated once";
@@ -52,13 +51,7 @@ bool Game::init() {
 	addEntity(light);
 	addEntity(new Tilemap(25, 25));
 
-	bool ok = true;
-
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		ok &= (*it)->init();
-	}
-
-	return ok;
+	return EntityGroup::init();
 }
 
 void Game::render() {
@@ -76,37 +69,7 @@ void Game::render() {
 	Renderer::instance().getLightingShader()->setView(view);
 	Renderer::instance().getLightingShader()->setViewPos(camera->getPosition());
 
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		(*it)->render();
-	}
-}
-
-Game::~Game() {
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		delete (*it);
-	}
-}
-
-void Game::update(float deltaTime) {
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		(*it)->update(deltaTime);
-	}
-}
-
-void Game::handleKeyboard(int key, int scancode, int action, int mods) {
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		(*it)->handleKeyboard(key, scancode, action, mods);
-	}
-}
-
-void Game::handleMouse(double xpos, double ypos) {
-	for (auto it = entities.begin(); it != entities.end(); it++) {
-		(*it)->handleMouse(xpos, ypos);
-	}
-}
-
-void Game::addEntity(Entity* entity) {
-	entities.push_back(entity);
+	EntityGroup::render();
 }
 
 //	---------------------------------	//

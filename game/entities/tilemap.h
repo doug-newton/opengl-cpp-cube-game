@@ -1,19 +1,14 @@
-#include "entity.h"
+#include "entity_group.h"
 #include "block.h"
 #include <vector>
 
-class Tilemap : public Entity {
+class Tilemap : public EntityGroup {
 
 private:
-	std::vector<Block*> blocks;
 	int length;
 	int breadth;
 
 public:
 	Tilemap(int length, int breadth);
-	~Tilemap();
-
 	bool init();
-	void render();
-
 };
