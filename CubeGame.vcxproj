@@ -143,7 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game\entities\camera.cpp" />
-    <ClCompile Include="FPS.cpp" />
+    <ClCompile Include="game\fps_calculator.cpp" />
     <ClCompile Include="game\entities\block.cpp" />
     <ClCompile Include="game\entities\entity.cpp" />
     <ClCompile Include="game\entities\entity_group.cpp" />
@@ -167,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\entities\camera.h" />
-    <ClInclude Include="FPS.h" />
+    <ClInclude Include="game\fps_calculator.h" />
     <ClInclude Include="game\entities\block.h" />
     <ClInclude Include="game\entities\entity.h" />
     <ClInclude Include="game\entities\entity_group.h" />

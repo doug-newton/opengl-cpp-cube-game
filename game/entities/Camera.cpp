@@ -2,7 +2,7 @@
 #include <math.h>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "../../FPS.h"
+#include "../fps_calculator.h"
 
 float Camera::speed = 2.5f;
 float Camera::sensitivity = 0.1f;

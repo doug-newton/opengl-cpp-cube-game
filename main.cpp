@@ -8,7 +8,6 @@
 #include "textures.h"
 #include "vaos.h"
 #include "gl_util.h"
-#include "FPS.h"
 #include <vector>
 #include "game/game.h"
 
@@ -28,10 +27,7 @@ int glMain()
 	game.setCallbacks();
 
 	while (!glfwWindowShouldClose(game.window)) {
-		FPS::calcDelta();
-		float deltaTime = FPS::getDelta();
-
-		game.update(deltaTime);
+		game.update();
 		game.render();
 
 		glfwPollEvents();

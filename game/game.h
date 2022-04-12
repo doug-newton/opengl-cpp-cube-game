@@ -11,6 +11,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "fps_calculator.h"
+
 #include "renderer.h"
 
 #include "shaders/lighting/shader_light.h"
@@ -32,6 +34,7 @@ public:
 	Game();
 
 	bool init();
+	void update();
 	void render();
 	void setCallbacks();
 
