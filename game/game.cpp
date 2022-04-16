@@ -13,7 +13,15 @@ Game::Game()
 		throw "Game can only be instantiated once";
 
 	instance = this;
+}
 
+void Game::mainLoop() {
+	while (!glfwWindowShouldClose(window)) {
+		update();
+		render();
+		glfwPollEvents();
+		glfwSwapBuffers(window);
+	}
 }
 
 bool Game::init() {
@@ -43,6 +51,8 @@ bool Game::init() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	setCallbacks();
 
 	camera = new Camera(width, height);
 	light = new Light(0, 15, 0);

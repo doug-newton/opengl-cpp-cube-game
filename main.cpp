@@ -24,15 +24,7 @@ int glMain()
 	if (!game.init())
 		return -1;
 
-	game.setCallbacks();
-
-	while (!glfwWindowShouldClose(game.window)) {
-		game.update();
-		game.render();
-
-		glfwPollEvents();
-		glfwSwapBuffers(game.window);
-	}
+	game.mainLoop();
 
 	glfwTerminate();
 

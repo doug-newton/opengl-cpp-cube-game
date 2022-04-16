@@ -24,14 +24,19 @@
 
 class Game: public EntityGroup {
 
-public:
+private:
 
-	static Game* instance;
 	GLFWwindow* window;
 	Camera* camera;
 	Light* light;
 
+public:
+
+	static Game* instance;
+
 	Game();
+
+	void mainLoop();
 
 	bool init();
 	void update();
