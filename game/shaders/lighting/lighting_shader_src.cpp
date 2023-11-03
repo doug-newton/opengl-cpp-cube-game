@@ -61,7 +61,7 @@ void main()
 	int y = tileSetDim - tileIndex/tileSetDim - 1;
 	vec2 sampleCoord = vec2(x * (1.0f/tileSetDim), y * (1.0f/tileSetDim)) + texCoord / tileSetDim;
 
-	vec3 ambient = light.ambient * material.ambient * texture(tileset, sampleCoord);
+	vec3 ambient = light.ambient * material.ambient * texture(tileset, sampleCoord).xyz;
 
 	vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(light.position - fragPos);
