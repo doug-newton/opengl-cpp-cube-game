@@ -29,6 +29,7 @@ private:
 	GLFWwindow* window;
 	Camera* camera;
 	Light* light;
+	Block* block;
 
 public:
 

@@ -14,7 +14,8 @@ Block::Block(int type, float x, float y, float z)
 }
 
 bool Block::init() {
-	vao = createCubeWithNormalsAndTexCoords();
+vao = createCubeWithNormalsAndTexCoords();
+	//	vao = createPlaneWithNormalsAndTexCoords();
 	return true;
 }
 

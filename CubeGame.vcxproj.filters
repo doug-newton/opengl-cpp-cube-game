@@ -137,5 +137,8 @@
     <ClInclude Include="game\fps_calculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\mesh_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
