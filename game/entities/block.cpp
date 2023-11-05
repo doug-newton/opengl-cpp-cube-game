@@ -14,7 +14,7 @@ Block::Block(int type, float x, float y, float z)
 }
 
 bool Block::init() {
-	vao = createCubeWithNormalsAndTexCoords();
+	vao = createCubeUsingCubeMesh();
 	return true;
 }
 
@@ -26,5 +26,5 @@ void Block::render() {
 	glm::mat4 transform = glm::mat4(1.0f);
 	transform = glm::translate(transform, position);
 	Renderer::instance().getLightingShader()->setModel(transform);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 }

@@ -56,10 +56,12 @@ bool Game::init() {
 
 	camera = new Camera(width, height);
 	light = new Light(0, 15, 0);
+	block = new Block(3, 0, 5, 0);
 
 	addEntity(camera);
 	addEntity(light);
 	addEntity(new Tilemap(25, 25));
+	addEntity(block);
 
 	return EntityGroup::init();
 }
