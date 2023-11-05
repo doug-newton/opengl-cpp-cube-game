@@ -1,7 +1,68 @@
 #include <iostream>
 #include <fstream>
 
-float* generate_cube_vertices() {
+void print_vertices(float *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
+	for (int side = 0; side < numSides; side++) {
+		for (int pos = 0; pos < numVerticesPerSide; pos++) {
+			for (int comp = 0; comp < vertexWidth; comp++) {
+				dest << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
+			}
+			dest << "\n";
+		}
+		dest << "\n";
+	}
+}
+
+void print_elements(int* elements, std::ostream& out) {
+	for (int s = 0; s < 6; s++) {
+		for (int o = 0; o < 6; o++) {
+			out << elements[s * 6 + o] << ", ";
+		}
+		out << "\n";
+	}
+}
+
+class Mesh {
+protected:
+	float* vertices;
+	int* elements;
+protected:
+	virtual float* generateVertices() = 0;
+	virtual int* generateElements() = 0;
+public:
+	virtual ~Mesh();
+	float* getVertices() const;
+	int* getElements() const;
+};
+
+Mesh::~Mesh() {
+	delete[] vertices;
+	delete[] elements;
+}
+
+float* Mesh::getVertices() const {
+	return vertices;
+}
+
+int* Mesh::getElements() const {
+	return elements;
+}
+
+
+class CubeMesh: public Mesh {
+protected:
+	virtual float* generateVertices() override;
+	virtual int* generateElements() override;
+public:
+	CubeMesh();
+};
+
+CubeMesh::CubeMesh() {
+	vertices = generateVertices();
+	elements = generateElements();
+}
+
+float* CubeMesh::generateVertices() {
 	int numSides = 6;
 	int numVerticesPerSide = 4;
 	int vertexWidth = 8;
@@ -53,7 +114,7 @@ float* generate_cube_vertices() {
 			//	-------------------
 			//	set position values
 			//	-------------------
-			
+
 			vertices[positionOffset + start + currentVertex * vertexWidth + axis] = sign * 0.5f;
 
 			// by default, set the current other 2 coords to the previous
@@ -107,19 +168,7 @@ float* generate_cube_vertices() {
 	return vertices;
 }
 
-void print_vertices(float *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
-	for (int side = 0; side < numSides; side++) {
-		for (int pos = 0; pos < numVerticesPerSide; pos++) {
-			for (int comp = 0; comp < vertexWidth; comp++) {
-				dest << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
-			}
-			dest << "\n";
-		}
-		dest << "\n";
-	}
-}
-
-int* generate_cube_elements() {
+int* CubeMesh::generateElements() {
 	int* result = new int[36];
 
 	int order[] = { 0, 1, 2, 2, 3, 0 };
@@ -131,63 +180,6 @@ int* generate_cube_elements() {
 	}
 
 	return result;
-}
-
-void print_elements(int* elements, std::ostream& out) {
-	for (int s = 0; s < 6; s++) {
-		for (int o = 0; o < 6; o++) {
-			out << elements[s * 6 + o] << ", ";
-		}
-		out << "\n";
-	}
-}
-
-class Mesh {
-protected:
-	float* vertices;
-	int* elements;
-protected:
-	virtual float* generateVertices() = 0;
-	virtual int* generateElements() = 0;
-public:
-	virtual ~Mesh();
-	float* getVertices() const;
-	int* getElements() const;
-};
-
-Mesh::~Mesh() {
-	delete[] vertices;
-	delete[] elements;
-}
-
-float* Mesh::getVertices() const {
-	return vertices;
-}
-
-int* Mesh::getElements() const {
-	return elements;
-}
-
-
-class CubeMesh: public Mesh {
-protected:
-	virtual float* generateVertices() override;
-	virtual int* generateElements() override;
-public:
-	CubeMesh();
-};
-
-CubeMesh::CubeMesh() {
-	vertices = generateVertices();
-	elements = generateElements();
-}
-
-float* CubeMesh::generateVertices() {
-	return generate_cube_vertices();
-}
-
-int* CubeMesh::generateElements() {
-	return generate_cube_elements();
 }
 
 int main() {
