@@ -3,13 +3,15 @@
 void generate_cube_vertices() {
 	int numSides = 6;
 	int numVerticesPerSide = 4;
-	int numElementsPerVertex = 3;
-	int dataSize = numSides * numVerticesPerSide * numElementsPerVertex;
+	int vertexWidth = 8;
+	int dataSize = numSides * numVerticesPerSide * vertexWidth;
 
 	int* vertices = new int[dataSize];
 
 	for (int i = 0; i < dataSize; i++)
 		vertices[i] = 0;
+
+	int positionOffset = 0;
 
 	for (int i = 0; i < 6; i++) {
 
@@ -31,38 +33,44 @@ void generate_cube_vertices() {
 
 		//	determine where to start populating elements (each side = 12 elements)
 
-		int start = i * 12;
+		int start = i * numVerticesPerSide * vertexWidth;
 
 		//	populate the first position of the side
 
-		vertices[start + axis] = sign;
-		vertices[start + p1] = -1;
-		vertices[start + p2] = -1;
+		vertices[positionOffset + start + axis] = sign;
+		vertices[positionOffset + start + p1] = -1;
+		vertices[positionOffset + start + p2] = -1;
 
-		for (int c = 1; c < 4; c++) {
-			vertices[start + c * 3 + axis] = sign;
+		for (int currentVertex = 1; currentVertex < 4; currentVertex++) {
+			vertices[positionOffset + start + currentVertex * vertexWidth + axis] = sign;
 
 			// by default, set the current other 2 coords to the previous
 
-			vertices[start + c * 3 + p1] = vertices[start + (c - 1) * 3 + p1];
-			vertices[start + c * 3 + p2] = vertices[start + (c - 1) * 3 + p2];
+			int p1CurrentIndex = positionOffset + start + currentVertex * vertexWidth + p1;
+			int p1LastIndex = positionOffset + start + (currentVertex - 1) * vertexWidth + p1;
+
+			int p2CurrentIndex = positionOffset + start + currentVertex * vertexWidth + p2;
+			int p2LastIndex = positionOffset + start + (currentVertex - 1) * vertexWidth + p2;
+
 
 			//	then take turns on which coord to flip
 			//	first flip p1, then flip p2, then flip p1
 
-			if (c % 2 == 1) {
-				vertices[start + c * 3 + p1] = -vertices[start + c * 3 + p1];
+			if (currentVertex % 2 == 1) {
+				vertices[p1CurrentIndex] = -vertices[p1LastIndex];
+				vertices[p2CurrentIndex] = vertices[p2LastIndex];
 			}
 			else {
-				vertices[start + c * 3 + p2] = -vertices[start + c * 3 + p2];
+				vertices[p1CurrentIndex] = vertices[p1LastIndex];
+				vertices[p2CurrentIndex] = -vertices[p2LastIndex];
 			}
 		}
 	}
 
 	for (int side = 0; side < numSides; side++) {
 		for (int pos = 0; pos < numVerticesPerSide; pos++) {
-			for (int comp = 0; comp < numElementsPerVertex; comp++) {
-				std::cout << vertices[side * (numVerticesPerSide * numElementsPerVertex) + pos * numElementsPerVertex + comp] << ", ";
+			for (int comp = 0; comp < vertexWidth; comp++) {
+				std::cout << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
 			}
 			std::cout << std::endl;
 		}
