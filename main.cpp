@@ -12,6 +12,8 @@ void generate_cube_vertices() {
 		vertices[i] = 0;
 
 	int positionOffset = 0;
+	int normalOffset = 3;
+	int textureOffset = 6;
 
 	for (int i = 0; i < 6; i++) {
 
@@ -41,7 +43,16 @@ void generate_cube_vertices() {
 		vertices[positionOffset + start + p1] = -1;
 		vertices[positionOffset + start + p2] = -1;
 
+		//	populate first normal
+
+		vertices[start + normalOffset + axis] = sign;
+
 		for (int currentVertex = 1; currentVertex < 4; currentVertex++) {
+
+			//	-------------------
+			//	set position values
+			//	-------------------
+			
 			vertices[positionOffset + start + currentVertex * vertexWidth + axis] = sign;
 
 			// by default, set the current other 2 coords to the previous
@@ -51,7 +62,6 @@ void generate_cube_vertices() {
 
 			int p2CurrentIndex = positionOffset + start + currentVertex * vertexWidth + p2;
 			int p2LastIndex = positionOffset + start + (currentVertex - 1) * vertexWidth + p2;
-
 
 			//	then take turns on which coord to flip
 			//	first flip p1, then flip p2, then flip p1
@@ -64,6 +74,33 @@ void generate_cube_vertices() {
 				vertices[p1CurrentIndex] = vertices[p1LastIndex];
 				vertices[p2CurrentIndex] = -vertices[p2LastIndex];
 			}
+
+			//	-----------------
+			//	set normal values
+			//	-----------------
+
+			int normalIndex = start + currentVertex * vertexWidth + normalOffset + axis;
+
+			vertices[normalIndex] = sign;
+
+			//	------------------
+			//	set texture values
+			//	------------------
+
+			int t1CurrentIndex = start + currentVertex * vertexWidth + textureOffset + 0;
+			int t2CurrentIndex = start + currentVertex * vertexWidth + textureOffset + 1;
+			int t1LastIndex = start + (currentVertex - 1) * vertexWidth + textureOffset + 0;
+			int t2LastIndex = start + (currentVertex - 1) * vertexWidth + textureOffset + 1;
+
+			if (currentVertex % 2 == 1) {
+				vertices[t1CurrentIndex] = 1 - vertices[t1LastIndex];
+				vertices[t2CurrentIndex] = vertices[t2LastIndex];
+			}
+			else {
+				vertices[t1CurrentIndex] = vertices[t1LastIndex];
+				vertices[t2CurrentIndex] = 1 - vertices[t2LastIndex];
+			}
+
 		}
 	}
 
