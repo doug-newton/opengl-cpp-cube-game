@@ -7,7 +7,8 @@ void generateSide(
 	int positionOffset,
 	int normalOffset,
 	int textureOffset,
-	int sideIndex);
+	int sideIndex,
+	bool oneSideOnly = false);
 
 void generateCorners(
 	float* vertices,

@@ -20,6 +20,7 @@ void setFirstVertex(
 	vertices[start + normalOffset + axis] = (float)sign * 1.0f;
 
 	//	populate first tex coords
+
 	vertices[start + textureOffset + 0] = 0.0f;
 	vertices[start + textureOffset + 1] = 0.0f;
 }
@@ -159,13 +160,14 @@ void generateCorners(
 }
 
 void generateSide(
-	float* vertices, 
+	float* vertices,
 	int numVerticesPerSide,
 	int vertexWidth,
-	int positionOffset, 
+	int positionOffset,
 	int normalOffset,
 	int textureOffset,
-	int sideIndex) {
+	int sideIndex,
+	bool oneSideOnly) {
 
 	int axis = sideIndex % 3;
 	int sign = 1 - 2 * (sideIndex % 2);
@@ -177,7 +179,7 @@ void generateSide(
 
 	//	determine where to start populating elements
 
-	int start = sideIndex * numVerticesPerSide * vertexWidth;
+	int start = oneSideOnly ? 0 : sideIndex * numVerticesPerSide * vertexWidth;
 
 	generateCorners(
 		vertices,
