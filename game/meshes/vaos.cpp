@@ -5,7 +5,7 @@
 
 GLuint createVao(Mesh* mesh);
 
-GLuint createCubeUsingCubeMesh() {
+GLuint createCubeVao() {
 	static GLuint vao = 0;
 
 	if (vao != 0) {

@@ -3,5 +3,5 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-GLuint createCubeUsingCubeMesh();
+GLuint createCubeVao();
 GLuint createTileVao();

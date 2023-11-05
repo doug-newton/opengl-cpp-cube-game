@@ -14,7 +14,7 @@ Block::Block(int type, float x, float y, float z)
 }
 
 bool Block::init() {
-	vao = createCubeUsingCubeMesh();
+	vao = createCubeVao();
 	return true;
 }
 
