@@ -142,19 +142,43 @@ void print_elements(int* elements, std::ostream& out) {
 	}
 }
 
+class CubeMesh {
+private:
+	float* vertices;
+	int* elements;
+public:
+	CubeMesh();
+	~CubeMesh();
+	float* getVertices() const;
+	int* getElements() const;
+};
+
+CubeMesh::CubeMesh() {
+	vertices = generate_cube_vertices();
+	elements = generate_cube_elements();
+}
+
+CubeMesh::~CubeMesh() {
+	delete[] vertices;
+	delete[] elements;
+}
+
+float* CubeMesh::getVertices() const {
+	return vertices;
+}
+
+int* CubeMesh::getElements() const {
+	return elements;
+}
+
 int main() {
+	CubeMesh mesh;
 
 	std::ofstream outfile("vertices.txt");
-
-	float* vertices = generate_cube_vertices();
-	print_vertices(vertices, 6, 4, 8, outfile);
-	delete[] vertices;
-
+	print_vertices(mesh.getVertices(), 6, 4, 8, outfile);
 	outfile.close();
 
-	int* elements = generate_cube_elements();
-	print_elements(elements, std::cout);
-	delete[] elements;
+	print_elements(mesh.getElements(), std::cout);
 
 	return 0;
 }
