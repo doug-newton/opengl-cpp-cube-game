@@ -8,5 +8,7 @@ protected:
 	virtual int* generateElements() override;
 public:
 	CubeMesh();
+	virtual int getVertexDataSize() override;
+	virtual int getElementDataSize() override;
 };
 

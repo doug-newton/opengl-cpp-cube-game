@@ -124,3 +124,11 @@ int* CubeMesh::generateElements() {
 
 	return result;
 }
+
+int CubeMesh::getElementDataSize() {
+	return 36;
+}
+
+int CubeMesh::getVertexDataSize() {
+	return 192;
+}

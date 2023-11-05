@@ -12,5 +12,7 @@ public:
 	virtual ~Mesh();
 	float* getVertices() const;
 	int* getElements() const;
+	virtual int getVertexDataSize() = 0;
+	virtual int getElementDataSize() = 0;
 };
 
