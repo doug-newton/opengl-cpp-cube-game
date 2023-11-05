@@ -13,7 +13,7 @@ bool Tilemap::init() {
 	for (int x = 0; x < breadth; x++) {
 		for (int z = 0; z < length; z++) {
 			int type = rand() % 4;
-			entities.push_back(new Block(type, 
+			entities.push_back(new Tile(type, 
 				offsetX + x, 
 				0, 
 				offsetZ + z));

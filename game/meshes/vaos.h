@@ -4,3 +4,4 @@
 #include <GLFW/glfw3.h>
 
 GLuint createCubeUsingCubeMesh();
+GLuint createTileVao();

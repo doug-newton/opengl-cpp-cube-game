@@ -1,5 +1,5 @@
 #include "entity_group.h"
-#include "block.h"
+#include "tile.h"
 #include <vector>
 
 class Tilemap : public EntityGroup {

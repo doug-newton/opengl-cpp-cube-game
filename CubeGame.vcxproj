@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game\entities\camera.cpp" />
+    <ClCompile Include="game\entities\tile.cpp" />
     <ClCompile Include="game\fps_calculator.cpp" />
     <ClCompile Include="game\entities\block.cpp" />
     <ClCompile Include="game\entities\entity.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="game\meshes\cube_mesh.cpp" />
     <ClCompile Include="game\meshes\mesh.cpp" />
+    <ClCompile Include="game\meshes\tile_mesh.cpp" />
     <ClCompile Include="game\renderer.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp" />
@@ -168,6 +170,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\entities\camera.h" />
+    <ClInclude Include="game\entities\tile.h" />
+    <ClInclude Include="game\meshes\tile_mesh.h" />
     <ClInclude Include="game\fps_calculator.h" />
     <ClInclude Include="game\entities\block.h" />
     <ClInclude Include="game\entities\entity.h" />
