@@ -142,33 +142,52 @@ void print_elements(int* elements, std::ostream& out) {
 	}
 }
 
-class CubeMesh {
-private:
+class Mesh {
+protected:
 	float* vertices;
 	int* elements;
+protected:
+	virtual float* generateVertices() = 0;
+	virtual int* generateElements() = 0;
 public:
-	CubeMesh();
-	~CubeMesh();
+	virtual ~Mesh();
 	float* getVertices() const;
 	int* getElements() const;
 };
 
-CubeMesh::CubeMesh() {
-	vertices = generate_cube_vertices();
-	elements = generate_cube_elements();
-}
-
-CubeMesh::~CubeMesh() {
+Mesh::~Mesh() {
 	delete[] vertices;
 	delete[] elements;
 }
 
-float* CubeMesh::getVertices() const {
+float* Mesh::getVertices() const {
 	return vertices;
 }
 
-int* CubeMesh::getElements() const {
+int* Mesh::getElements() const {
 	return elements;
+}
+
+
+class CubeMesh: public Mesh {
+protected:
+	virtual float* generateVertices() override;
+	virtual int* generateElements() override;
+public:
+	CubeMesh();
+};
+
+CubeMesh::CubeMesh() {
+	vertices = generateVertices();
+	elements = generateElements();
+}
+
+float* CubeMesh::generateVertices() {
+	return generate_cube_vertices();
+}
+
+int* CubeMesh::generateElements() {
+	return generate_cube_elements();
 }
 
 int main() {
