@@ -1,16 +1,16 @@
 #include <iostream>
 #include <fstream>
 
-int* generate_cube_vertices() {
+float* generate_cube_vertices() {
 	int numSides = 6;
 	int numVerticesPerSide = 4;
 	int vertexWidth = 8;
 	int dataSize = numSides * numVerticesPerSide * vertexWidth;
 
-	int* vertices = new int[dataSize];
+	float* vertices = new float[dataSize];
 
 	for (int i = 0; i < dataSize; i++)
-		vertices[i] = 0;
+		vertices[i] = 0.0f;
 
 	int positionOffset = 0;
 	int normalOffset = 3;
@@ -40,13 +40,13 @@ int* generate_cube_vertices() {
 
 		//	populate the first position of the side
 
-		vertices[positionOffset + start + axis] = sign;
-		vertices[positionOffset + start + p1] = -1;
-		vertices[positionOffset + start + p2] = -1;
+		vertices[positionOffset + start + axis] = (float)sign * 0.5f;
+		vertices[positionOffset + start + p1] = -1 * 0.5f;
+		vertices[positionOffset + start + p2] = -1 * 0.5f;
 
 		//	populate first normal
 
-		vertices[start + normalOffset + axis] = sign;
+		vertices[start + normalOffset + axis] = (float)sign * 1.0f;
 
 		for (int currentVertex = 1; currentVertex < 4; currentVertex++) {
 
@@ -54,7 +54,7 @@ int* generate_cube_vertices() {
 			//	set position values
 			//	-------------------
 			
-			vertices[positionOffset + start + currentVertex * vertexWidth + axis] = sign;
+			vertices[positionOffset + start + currentVertex * vertexWidth + axis] = sign * 0.5f;
 
 			// by default, set the current other 2 coords to the previous
 
@@ -82,7 +82,7 @@ int* generate_cube_vertices() {
 
 			int normalIndex = start + currentVertex * vertexWidth + normalOffset + axis;
 
-			vertices[normalIndex] = sign;
+			vertices[normalIndex] = (float)sign * 1.0f;
 
 			//	------------------
 			//	set texture values
@@ -101,14 +101,13 @@ int* generate_cube_vertices() {
 				vertices[t1CurrentIndex] = vertices[t1LastIndex];
 				vertices[t2CurrentIndex] = 1 - vertices[t2LastIndex];
 			}
-
 		}
 	}
 
 	return vertices;
 }
 
-void print_vertices(int *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
+void print_vertices(float *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
 	for (int side = 0; side < numSides; side++) {
 		for (int pos = 0; pos < numVerticesPerSide; pos++) {
 			for (int comp = 0; comp < vertexWidth; comp++) {
@@ -124,7 +123,7 @@ int main() {
 
 	std::ofstream outfile("vertices.txt");
 
-	int* vertices = generate_cube_vertices();
+	float* vertices = generate_cube_vertices();
 	print_vertices(vertices, 6, 4, 8, outfile);
 	delete[] vertices;
 
