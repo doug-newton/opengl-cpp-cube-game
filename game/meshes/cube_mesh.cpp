@@ -167,10 +167,10 @@ void generateSide(
 	int positionOffset, 
 	int normalOffset,
 	int textureOffset,
-	int i) {
+	int sideIndex) {
 
-	int axis = i % 3;
-	int sign = 1 - 2 * (i % 2);
+	int axis = sideIndex % 3;
+	int sign = 1 - 2 * (sideIndex % 2);
 
 	int p1 = 0;
 	while (p1 == axis) p1++;
@@ -179,7 +179,7 @@ void generateSide(
 
 	//	determine where to start populating elements
 
-	int start = i * numVerticesPerSide * vertexWidth;
+	int start = sideIndex * numVerticesPerSide * vertexWidth;
 
 	generateCorners(
 		vertices,
@@ -210,7 +210,7 @@ float* CubeMesh::generateVertices() {
 	int normalOffset = 3;
 	int textureOffset = 6;
 
-	for (int i = 0; i < 6; i++) {
+	for (int sideIndex = 0; sideIndex < 6; sideIndex++) {
 		generateSide(
 			vertices,
 			numVerticesPerSide,
@@ -218,7 +218,7 @@ float* CubeMesh::generateVertices() {
 			positionOffset,
 			normalOffset,
 			textureOffset,
-			i
+			sideIndex
 		);
 	}
 
