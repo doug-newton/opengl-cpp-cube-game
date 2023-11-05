@@ -84,9 +84,9 @@ void Game::render() {
 	Renderer::instance().getSimpleShader()->use();
 	Renderer::instance().getSimpleShader()->setCamera(camera);
 
-	Renderer::instance().getLightingShader()->use();
-	Renderer::instance().getLightingShader()->setLight(*light);
-	Renderer::instance().getLightingShader()->setCamera(camera);
+	Renderer::instance().getTileShader()->use();
+	Renderer::instance().getTileShader()->setLight(*light);
+	Renderer::instance().getTileShader()->setCamera(camera);
 
 	EntityGroup::render();
 }

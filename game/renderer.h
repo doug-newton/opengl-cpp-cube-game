@@ -1,7 +1,7 @@
 #pragma once
 
 #include "shaders/simple/simple_shader.h"
-#include "shaders/lighting/lighting_shader.h"
+#include "shaders/lighting/tile_shader.h"
 
 //	Meyer's Singleton
 //	https://laristra.github.io/flecsi/src/developer-guide/patterns/meyers_singleton.html
@@ -24,10 +24,10 @@ private:
 	~Renderer();
 
 	SimpleShader* simpleShader;
-	LightingShader* lightingShader;
+	TileShader* lightingShader;
 
 public:
 	SimpleShader* getSimpleShader();
-	LightingShader* getLightingShader();
+	TileShader* getTileShader();
 
 };

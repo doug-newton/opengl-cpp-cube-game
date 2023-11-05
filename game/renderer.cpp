@@ -6,7 +6,7 @@ Renderer::Renderer()
 	lightingShader(nullptr)
 {
 	simpleShader = new SimpleShader();
-	lightingShader = new LightingShader();
+	lightingShader = new TileShader();
 }
 
 Renderer::~Renderer() {
@@ -18,6 +18,6 @@ SimpleShader* Renderer::getSimpleShader() {
 	return simpleShader;
 }
 
-LightingShader* Renderer::getLightingShader() {
+TileShader* Renderer::getTileShader() {
 	return lightingShader;
 }

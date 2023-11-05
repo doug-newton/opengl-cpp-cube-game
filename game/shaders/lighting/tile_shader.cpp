@@ -1,6 +1,6 @@
-#include "lighting_shader.h"
+#include "tile_shader.h"
 
-LightingShader::LightingShader() 
+TileShader::TileShader() 
 	:
 	tileset(0)
 {
@@ -32,55 +32,55 @@ LightingShader::LightingShader()
 	setTileIndex(0);
 }
 
-LightingShader::~LightingShader() {
+TileShader::~TileShader() {
 	glDeleteProgram(id);
 }
 
-void LightingShader::use() {
+void TileShader::use() {
 	glUseProgram(this->id);
 }
 
-void LightingShader::setMaterial(const ShaderMaterial& material) {
+void TileShader::setMaterial(const ShaderMaterial& material) {
 	glUniform3fv(materialAmbientLocation, 1, glm::value_ptr(material.ambient));
 	glUniform3fv(materialDiffuseLocation, 1, glm::value_ptr(material.diffuse));
 	glUniform3fv(materialSpecularLocation, 1, glm::value_ptr(material.specular));
 	glUniform1f(materialShininessLocation, material.shininess);
 }
 
-void LightingShader::setLight(const ShaderLight& light) {
+void TileShader::setLight(const ShaderLight& light) {
 	glUniform3fv(lightPositionLocation, 1, glm::value_ptr(light.position));
 	glUniform3fv(lightAmbientLocation, 1, glm::value_ptr(light.ambient));
 	glUniform3fv(lightDiffuseLocation, 1, glm::value_ptr(light.diffuse));
 	glUniform3fv(lightSpecularLocation, 1, glm::value_ptr(light.specular));
 }
 
-void LightingShader::setModel(const glm::mat4& model) {
+void TileShader::setModel(const glm::mat4& model) {
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
 }
 
-void LightingShader::setView(const glm::mat4& view) {
+void TileShader::setView(const glm::mat4& view) {
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 }
 
-void LightingShader::setProjection(const glm::mat4& projection) {
+void TileShader::setProjection(const glm::mat4& projection) {
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-void LightingShader::setViewPos(const glm::vec3& viewPos) {
+void TileShader::setViewPos(const glm::vec3& viewPos) {
 	glUniform3fv(viewPosLocation, 1, glm::value_ptr(viewPos));
 }
 
-void LightingShader::setTileset(GLuint texture) {
+void TileShader::setTileset(GLuint texture) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glUniform1ui(tilesetLocation, 0);
 }
 
-void LightingShader::setTileIndex(int index) {
+void TileShader::setTileIndex(int index) {
 	glUniform1i(tileIndexLocation, index);
 }
 
-void LightingShader::setCamera(Camera* camera) {
+void TileShader::setCamera(Camera* camera) {
 	setProjection(camera->getProjectionMatrix());
 	setView(camera->getViewMatrix());
 	setViewPos(camera->getPosition());

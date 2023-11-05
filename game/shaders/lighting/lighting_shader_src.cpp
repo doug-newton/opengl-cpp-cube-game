@@ -1,6 +1,6 @@
-#include "lighting_shader.h"
+#include "tile_shader.h"
 
-const std::string LightingShader::vertexSource = std::string(R"glsl(
+const std::string TileShader::vertexSource = std::string(R"glsl(
 #version 330 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
@@ -23,7 +23,7 @@ void main()
 };
 )glsl");
 
-const std::string LightingShader::fragmentSource = std::string(R"glsl(
+const std::string TileShader::fragmentSource = std::string(R"glsl(
 #version 330 core
 
 struct Material {

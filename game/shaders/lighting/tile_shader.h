@@ -11,7 +11,7 @@
 #include "../../../textures.h"
 #include "../../entities/camera.h"
 
-class LightingShader {
+class TileShader {
 
 	const static std::string vertexSource;
 	const static std::string fragmentSource;
@@ -19,8 +19,8 @@ class LightingShader {
 
 public:
 
-	LightingShader();
-	~LightingShader();
+	TileShader();
+	~TileShader();
 
 	void use();
 
