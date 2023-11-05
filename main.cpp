@@ -119,6 +119,29 @@ void print_vertices(float *vertices, int numSides, int numVerticesPerSide, int v
 	}
 }
 
+int* generate_cube_elements() {
+	int* result = new int[36];
+
+	int order[] = { 0, 1, 2, 2, 3, 0 };
+
+	for (int s = 0; s < 6; s++) {
+		for (int o = 0; o < 6; o++) {
+			result[s * 6 + o] = s * 4 + order[o];
+		}
+	}
+
+	return result;
+}
+
+void print_elements(int* elements, std::ostream& out) {
+	for (int s = 0; s < 6; s++) {
+		for (int o = 0; o < 6; o++) {
+			out << elements[s * 6 + o] << ", ";
+		}
+		out << "\n";
+	}
+}
+
 int main() {
 
 	std::ofstream outfile("vertices.txt");
@@ -128,6 +151,10 @@ int main() {
 	delete[] vertices;
 
 	outfile.close();
+
+	int* elements = generate_cube_elements();
+	print_elements(elements, std::cout);
+	delete[] elements;
 
 	return 0;
 }
