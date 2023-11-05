@@ -1,4 +1,5 @@
-#include<iostream>
+#include <iostream>
+#include <fstream>
 
 int* generate_cube_vertices() {
 	int numSides = 6;
@@ -17,12 +18,12 @@ int* generate_cube_vertices() {
 
 	for (int i = 0; i < 6; i++) {
 
-		int axis = i % 3;
-		int sign = 1 - 2 * (i % 2);
 		//	axis and sign will iterate through:
 		//	0,  1,  2,  0,  1,  2
 		//	1, -1,  1, -1,  1, -1
-		std::cout << "axis=" << axis << ", sign=" << sign << std::endl;
+
+		int axis = i % 3;
+		int sign = 1 - 2 * (i % 2);
 
 		//	determine the other 2 coords to update in each position, 
 		//	i.e. must skip the axis component,
@@ -121,9 +122,13 @@ void print_vertices(int *vertices, int numSides, int numVerticesPerSide, int ver
 
 int main() {
 
+	std::ofstream outfile("vertices.txt");
+
 	int* vertices = generate_cube_vertices();
-	print_vertices(vertices, 6, 4, 8, std::cout);
+	print_vertices(vertices, 6, 4, 8, outfile);
 	delete[] vertices;
+
+	outfile.close();
 
 	return 0;
 }
