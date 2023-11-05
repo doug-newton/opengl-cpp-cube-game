@@ -1,6 +1,6 @@
 #include<iostream>
 
-void generate_cube_vertices() {
+int* generate_cube_vertices() {
 	int numSides = 6;
 	int numVerticesPerSide = 4;
 	int vertexWidth = 8;
@@ -104,47 +104,26 @@ void generate_cube_vertices() {
 		}
 	}
 
+	return vertices;
+}
+
+void print_vertices(int *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
 	for (int side = 0; side < numSides; side++) {
 		for (int pos = 0; pos < numVerticesPerSide; pos++) {
 			for (int comp = 0; comp < vertexWidth; comp++) {
-				std::cout << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
+				dest << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
 			}
-			std::cout << std::endl;
+			dest << "\n";
 		}
-		std::cout << std::endl;
-	}
-
-	delete[] vertices;
-}
-
-void iterate_corners() {
-
-	int x = -1;
-	int y = -1;
-
-	int positions[8] = {
-		-1, -1,
-		 0,  0,
-		 0,  0,
-		 0,  0,
-	};
-
-	std::cout << x << " " << y << std::endl;
-
-	for (int i = 0; i < 3; i++) {
-		if (i % 2 == 0) {
-			x = -x;
-		}
-		else {
-			y = -y;
-		}
-		std::cout << x << " " << y << std::endl;
+		dest << "\n";
 	}
 }
 
 int main() {
 
-	generate_cube_vertices();
+	int* vertices = generate_cube_vertices();
+	print_vertices(vertices, 6, 4, 8, std::cout);
+	delete[] vertices;
 
 	return 0;
 }
