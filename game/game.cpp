@@ -55,11 +55,17 @@ bool Game::init() {
 	setCallbacks();
 
 	camera = new Camera(width, height);
-	light = new Light(0, 15, 0);
+
+	light = new ShaderLight(
+		glm::vec3(0, 15, 0),
+		glm::vec3(0.4f, 0.4f, 0.4f),
+		glm::vec3(0.5f, 0.5f, 0.5f),
+		glm::vec3(1.0f, 1.0f, 1.0f)
+	);
+
 	block = new Block(3, 0, 5, 0);
 
 	addEntity(camera);
-	addEntity(light);
 	addEntity(new Tilemap(25, 25));
 	addEntity(block);
 
@@ -79,7 +85,7 @@ void Game::render() {
 	Renderer::instance().getSimpleShader()->setCamera(camera);
 
 	Renderer::instance().getLightingShader()->use();
-	Renderer::instance().getLightingShader()->setLight(light->getShaderLight());
+	Renderer::instance().getLightingShader()->setLight(*light);
 	Renderer::instance().getLightingShader()->setCamera(camera);
 
 	EntityGroup::render();

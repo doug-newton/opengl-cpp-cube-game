@@ -18,7 +18,6 @@
 #include "shaders/lighting/shader_light.h"
 #include "shaders/lighting/shader_material.h"
 
-#include "entities/light.h"
 #include "entities/block.h"
 #include "entities/tilemap.h"
 
@@ -28,8 +27,8 @@ private:
 
 	GLFWwindow* window;
 	Camera* camera;
-	Light* light;
 	Block* block;
+	ShaderLight* light;
 
 public:
 
