@@ -174,7 +174,6 @@
     <ClInclude Include="game\entities\light.h" />
     <ClInclude Include="game\entities\tilemap.h" />
     <ClInclude Include="game\game.h" />
-    <ClInclude Include="game\mesh_builder.h" />
     <ClInclude Include="game\renderer.h" />
     <ClInclude Include="game\shaders\lighting\lighting_shader.h" />
     <ClInclude Include="game\shaders\shader_compiler.h" />
