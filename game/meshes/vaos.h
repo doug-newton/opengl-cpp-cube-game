@@ -9,3 +9,4 @@ GLuint createCubeWithNormals();
 GLuint createCubeWithNormalsAndTexCoords();
 GLuint createLightVao();
 GLuint createPlaneWithNormalsAndTexCoords();
+GLuint createCubeUsingCubeMesh();

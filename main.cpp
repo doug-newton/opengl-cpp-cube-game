@@ -1,36 +1,32 @@
 #include <iostream>
-#include <fstream>
-#include "game/meshes/cube_mesh.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "stb_image.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "textures.h"
+#include "vaos.h"
+#include "gl_util.h"
+#include <vector>
+#include "game/game.h"
 
-void print_vertices(float *vertices, int numSides, int numVerticesPerSide, int vertexWidth, std::ostream& dest) {
-	for (int side = 0; side < numSides; side++) {
-		for (int pos = 0; pos < numVerticesPerSide; pos++) {
-			for (int comp = 0; comp < vertexWidth; comp++) {
-				dest << vertices[side * (numVerticesPerSide * vertexWidth) + pos * vertexWidth + comp] << ", ";
-			}
-			dest << "\n";
-		}
-		dest << "\n";
-	}
-}
-
-void print_elements(int* elements, std::ostream& out) {
-	for (int s = 0; s < 6; s++) {
-		for (int o = 0; o < 6; o++) {
-			out << elements[s * 6 + o] << ", ";
-		}
-		out << "\n";
-	}
-}
+int glMain();
 
 int main() {
-	CubeMesh mesh;
+	return glMain();
+}
 
-	std::ofstream outfile("vertices.txt");
-	print_vertices(mesh.getVertices(), 6, 4, 8, outfile);
-	outfile.close();
+int glMain()
+{
+	Game game;
 
-	print_elements(mesh.getElements(), std::cout);
+	if (!game.init())
+		return -1;
+
+	game.mainLoop();
+
+	glfwTerminate();
 
 	return 0;
 }
