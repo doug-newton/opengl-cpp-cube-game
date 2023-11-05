@@ -152,6 +152,7 @@
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="game\meshes\cube_mesh.cpp" />
     <ClCompile Include="game\meshes\mesh.cpp" />
+    <ClCompile Include="game\meshes\mesh_algorithm.cpp" />
     <ClCompile Include="game\meshes\tile_mesh.cpp" />
     <ClCompile Include="game\renderer.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader.cpp" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="game\entities\camera.h" />
     <ClInclude Include="game\entities\tile.h" />
+    <ClInclude Include="game\meshes\mesh_algorithm.h" />
     <ClInclude Include="game\meshes\tile_mesh.h" />
     <ClInclude Include="game\fps_calculator.h" />
     <ClInclude Include="game\entities\block.h" />

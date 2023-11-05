@@ -1,5 +1,8 @@
 #pragma once
 
+//	including for base classes of mesh to have access
+#include "mesh_algorithm.h"
+
 class Mesh {
 protected:
 	float* vertices;
