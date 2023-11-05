@@ -24,7 +24,7 @@
     <ClCompile Include="textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vaos.cpp">
+    <ClCompile Include="game\meshes\vaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gl_util.cpp">
@@ -89,7 +89,7 @@
     <ClInclude Include="textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vaos.h">
+    <ClInclude Include="game\meshes\vaos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gl_util.h">

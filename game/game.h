@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../textures.h"
-#include "../vaos.h"
+#include "meshes/vaos.h"
 #include "entities/Camera.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

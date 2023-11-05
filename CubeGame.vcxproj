@@ -163,7 +163,7 @@
     <ClCompile Include="gl_util.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="textures.cpp" />
-    <ClCompile Include="vaos.cpp" />
+    <ClCompile Include="game\meshes\vaos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\entities\camera.h" />
@@ -183,7 +183,7 @@
     <ClInclude Include="gl_util.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="textures.h" />
-    <ClInclude Include="vaos.h" />
+    <ClInclude Include="game\meshes\vaos.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

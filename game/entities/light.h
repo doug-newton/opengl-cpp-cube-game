@@ -8,7 +8,7 @@
 #include "../renderer.h"
 #include "../shaders/lighting/shader_light.h"
 #include "../renderer.h"
-#include "../../vaos.h"
+#include "../meshes/vaos.h"
 
 class Light : public Entity {
 private:
