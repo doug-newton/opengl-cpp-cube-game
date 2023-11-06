@@ -14,7 +14,7 @@ class Block : public Entity {
 
 private:
 
-	GLuint vao;
+	std::shared_ptr<VaoReference> vao;
 
 	ShaderMaterial material;
 

@@ -17,5 +17,6 @@ public:
 	int* getElements() const;
 	virtual int getVertexDataSize() = 0;
 	virtual int getElementDataSize() = 0;
+	virtual int getElementDataLength() = 0;
 };
 

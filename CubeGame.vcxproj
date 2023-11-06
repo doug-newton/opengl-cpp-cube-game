@@ -154,6 +154,7 @@
     <ClCompile Include="game\meshes\mesh.cpp" />
     <ClCompile Include="game\meshes\mesh_algorithm.cpp" />
     <ClCompile Include="game\meshes\tile_mesh.cpp" />
+    <ClCompile Include="game\meshes\vao_reference.cpp" />
     <ClCompile Include="game\renderer.cpp" />
     <ClCompile Include="game\shaders\lighting\tile_shader.cpp" />
     <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="game\game.h" />
     <ClInclude Include="game\meshes\cube_mesh.h" />
     <ClInclude Include="game\meshes\mesh.h" />
+    <ClInclude Include="game\meshes\vao_reference.h" />
     <ClInclude Include="game\renderer.h" />
     <ClInclude Include="game\shaders\lighting\tile_shader.h" />
     <ClInclude Include="game\shaders\shader_compiler.h" />

@@ -22,9 +22,9 @@ void Tile::render() {
 	Renderer::instance().getTileShader()->use();
 	Renderer::instance().getTileShader()->setMaterial(material);
 	Renderer::instance().getTileShader()->setTileIndex(type);
-	glBindVertexArray(vao);
+	glBindVertexArray(vao.get()->getVao());
 	glm::mat4 transform = glm::mat4(1.0f);
 	transform = glm::translate(transform, position);
 	Renderer::instance().getTileShader()->setModel(transform);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_TRIANGLES, vao.get()->getEboLength(), GL_UNSIGNED_INT, nullptr);
 }

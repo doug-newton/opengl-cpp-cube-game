@@ -3,33 +3,37 @@
 #include "cube_mesh.h"
 #include "tile_mesh.h"
 
-GLuint createVao(Mesh* mesh);
+std::shared_ptr<VaoReference> createVao(Mesh* mesh);
 
-GLuint createCubeVao() {
-	static GLuint vao = 0;
+std::shared_ptr<VaoReference> createCubeVao() {
+	static std::shared_ptr<VaoReference> ptr;
 
-	if (vao != 0) {
-		return vao;
+	if (ptr != nullptr) {
+		return ptr;
 	}
 
 	CubeMesh mesh;
 
-	return createVao(&mesh);
+	ptr = createVao(&mesh);
+
+	return ptr;
 }
 
-GLuint createTileVao() {
-	static GLuint vao = 0;
+std::shared_ptr<VaoReference> createTileVao() {
+	static std::shared_ptr<VaoReference> ptr;
 
-	if (vao != 0) {
-		return vao;
+	if (ptr != nullptr) {
+		return ptr;
 	}
 
 	TileMesh mesh;
 
-	return createVao(&mesh);
+	ptr = createVao(&mesh);
+
+	return ptr;
 }
 
-GLuint createVao(Mesh* mesh) {
+std::shared_ptr<VaoReference> createVao(Mesh* mesh) {
 	GLuint vao = 0;
 
 	glGenVertexArrays(1, &vao);
@@ -56,5 +60,7 @@ GLuint createVao(Mesh* mesh) {
 
 	glBindVertexArray(0);
 
-	return vao;
+	std::shared_ptr<VaoReference> result = std::make_shared<VaoReference>(vao, vbo, ebo, mesh->getElementDataLength());
+
+	return result;
 }

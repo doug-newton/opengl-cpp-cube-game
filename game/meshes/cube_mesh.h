@@ -10,5 +10,6 @@ public:
 	CubeMesh();
 	virtual int getVertexDataSize() override;
 	virtual int getElementDataSize() override;
+	virtual int getElementDataLength() override;
 };
 

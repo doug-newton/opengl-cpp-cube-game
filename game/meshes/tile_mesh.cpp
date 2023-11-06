@@ -51,9 +51,13 @@ int* TileMesh::generateElements() {
 }
 
 int TileMesh::getElementDataSize() {
-	return 6 * sizeof(int);
+	return getElementDataLength() * sizeof(int);
 }
 
 int TileMesh::getVertexDataSize() {
 	return 32 * sizeof(float);
+}
+
+int TileMesh::getElementDataLength() {
+	return 6;
 }

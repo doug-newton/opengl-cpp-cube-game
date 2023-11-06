@@ -50,9 +50,13 @@ int* CubeMesh::generateElements() {
 }
 
 int CubeMesh::getElementDataSize() {
-	return 36 * sizeof(int);
+	return getElementDataLength() * sizeof(int);
 }
 
 int CubeMesh::getVertexDataSize() {
 	return 192 * sizeof(float);
+}
+
+int CubeMesh::getElementDataLength() {
+	return 36;
 }

@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "vao_reference.h"
+#include <memory>
 
-GLuint createCubeVao();
-GLuint createTileVao();
+std::shared_ptr<VaoReference> createCubeVao();
+std::shared_ptr<VaoReference> createTileVao();
