@@ -18,73 +18,10 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="textures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\meshes\vaos.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gl_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\lighting\lighting_shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\lighting\shader_light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\lighting\shader_material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\simple\simple_shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\shader_compiler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\simple\simple_shader_src.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\block.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\tilemap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\entity_group.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\entities\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\fps_calculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\meshes\mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\meshes\cube_mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,61 +29,7 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="textures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\meshes\vaos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gl_util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\shaders\lighting\lighting_shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\shaders\lighting\shader_light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\shaders\lighting\shader_material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\shaders\simple\simple_shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\shaders\shader_compiler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\tilemap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\entity_group.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\entities\camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\fps_calculator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\meshes\mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\meshes\cube_mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

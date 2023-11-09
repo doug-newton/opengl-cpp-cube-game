@@ -142,58 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game\entities\camera.cpp" />
-    <ClCompile Include="game\entities\tile.cpp" />
-    <ClCompile Include="game\fps_calculator.cpp" />
-    <ClCompile Include="game\entities\block.cpp" />
-    <ClCompile Include="game\entities\entity.cpp" />
-    <ClCompile Include="game\entities\entity_group.cpp" />
-    <ClCompile Include="game\entities\tilemap.cpp" />
-    <ClCompile Include="game\game.cpp" />
-    <ClCompile Include="game\meshes\cube_mesh.cpp" />
-    <ClCompile Include="game\meshes\mesh.cpp" />
-    <ClCompile Include="game\meshes\mesh_algorithm.cpp" />
-    <ClCompile Include="game\meshes\tile_mesh.cpp" />
-    <ClCompile Include="game\meshes\vao_reference.cpp" />
-    <ClCompile Include="game\renderer.cpp" />
-    <ClCompile Include="game\shaders\lighting\tile_shader.cpp" />
-    <ClCompile Include="game\shaders\lighting\lighting_shader_src.cpp" />
-    <ClCompile Include="game\shaders\shader_compiler.cpp" />
-    <ClCompile Include="game\shaders\simple\simple_shader.cpp" />
-    <ClCompile Include="game\shaders\lighting\shader_light.cpp" />
-    <ClCompile Include="game\shaders\lighting\shader_material.cpp" />
-    <ClCompile Include="game\shaders\simple\simple_shader_src.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="gl_util.cpp" />
-    <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="textures.cpp" />
-    <ClCompile Include="game\meshes\vaos.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game\entities\camera.h" />
-    <ClInclude Include="game\entities\tile.h" />
-    <ClInclude Include="game\meshes\mesh_algorithm.h" />
-    <ClInclude Include="game\meshes\tile_mesh.h" />
-    <ClInclude Include="game\fps_calculator.h" />
-    <ClInclude Include="game\entities\block.h" />
-    <ClInclude Include="game\entities\entity.h" />
-    <ClInclude Include="game\entities\entity_group.h" />
-    <ClInclude Include="game\entities\tilemap.h" />
-    <ClInclude Include="game\game.h" />
-    <ClInclude Include="game\meshes\cube_mesh.h" />
-    <ClInclude Include="game\meshes\mesh.h" />
-    <ClInclude Include="game\meshes\vao_reference.h" />
-    <ClInclude Include="game\renderer.h" />
-    <ClInclude Include="game\shaders\lighting\tile_shader.h" />
-    <ClInclude Include="game\shaders\shader_compiler.h" />
-    <ClInclude Include="game\shaders\simple\simple_shader.h" />
-    <ClInclude Include="game\shaders\lighting\shader_light.h" />
-    <ClInclude Include="game\shaders\lighting\shader_material.h" />
     <ClInclude Include="gl_util.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="textures.h" />
-    <ClInclude Include="game\meshes\vaos.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
