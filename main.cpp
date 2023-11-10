@@ -10,24 +10,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void process_input(GLFWwindow* window);
 std::string read_all_lines(const char* source) noexcept(false);
 GLuint create_shader_program();
-
-bool checkShaderCompilation(GLuint shaderID) {
-	GLint success;
-	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
-
-	if (success) {
-		return true;
-	}
-
-	GLint infoLogLength;
-	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-	std::vector<GLchar> infoLog(infoLogLength);
-	glGetShaderInfoLog(shaderID, infoLogLength, nullptr, infoLog.data());
-	std::cerr << "shader compile error:\n" << infoLog.data() << "\n";
-
-	return false;
-}
+bool checkShaderCompilation(GLuint shaderID);
+bool compile_and_attach_shader(GLuint programID, unsigned int type, const char* path);
 
 int main(int argc, char** argv) {
 	glfwInit();
@@ -175,6 +159,24 @@ GLuint create_shader_program() {
 	glLinkProgram(programID);
 
 	return programID;
+}
+
+bool checkShaderCompilation(GLuint shaderID) {
+	GLint success;
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
+
+	if (success) {
+		return true;
+	}
+
+	GLint infoLogLength;
+	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+	std::vector<GLchar> infoLog(infoLogLength);
+	glGetShaderInfoLog(shaderID, infoLogLength, nullptr, infoLog.data());
+	std::cerr << "shader compile error:\n" << infoLog.data() << "\n";
+
+	return false;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
