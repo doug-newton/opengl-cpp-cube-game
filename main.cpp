@@ -13,37 +13,7 @@ GLuint create_shader_program();
 bool checkShaderCompilation(GLuint shaderID);
 bool compile_and_attach_shader(GLuint programID, unsigned int type, const char* path);
 
-int main(int argc, char** argv) {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL);
-
-	if (window == nullptr) {
-		std::cout << "failed to create window" << std::endl;
-		glfwTerminate();
-		return 1;
-	}
-
-	glfwMakeContextCurrent(window);
-
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "failed to initialise GLAD" << std::endl;
-		return 1;
-	}
-
-	glViewport(0, 0, 800, 600);
-
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	glClearColor(0.5f, 0.25f, 0.0f, 1.0f);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	GLuint program = create_shader_program();
-
+GLuint createQuadVao1() {
 	GLfloat positions[] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
@@ -88,6 +58,72 @@ int main(int argc, char** argv) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 
+	glBindVertexArray(0);
+
+	return vao;
+}
+
+GLuint createTriangleVao() {
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	GLfloat vertices[] = {
+		-0.8f, -0.8f, 1.0f,		1.0f, 0.0f, 0.0f, 1.0f,
+		-0.8f,  0.8f, 1.0f,		0.0f, 1.0f, 0.0f, 1.0f,
+		 0.0f, -0.4f, 1.0f,		0.0f, 0.0f, 1.0f, 1.0f,
+	};
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0);
+
+	return vao;
+}
+
+int main(int argc, char** argv) {
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL);
+
+	if (window == nullptr) {
+		std::cout << "failed to create window" << std::endl;
+		glfwTerminate();
+		return 1;
+	}
+
+	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cout << "failed to initialise GLAD" << std::endl;
+		return 1;
+	}
+
+	glViewport(0, 0, 800, 600);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	glClearColor(0.5f, 0.25f, 0.0f, 1.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	GLuint program = create_shader_program();
+
+	GLuint quadVao1 = createQuadVao1();
+	GLuint triangleVao = createTriangleVao();
+
 	glUseProgram(program);
 
 	while (!glfwWindowShouldClose(window)) {
@@ -95,16 +131,17 @@ int main(int argc, char** argv) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glBindVertexArray(quadVao1);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
+
+		glBindVertexArray(triangleVao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	glDeleteVertexArrays(1, &vao);
-	glDeleteBuffers(1, &position_vbo);
-	glDeleteBuffers(1, &colour_vbo);
-	glDeleteBuffers(1, &ebo);
+	glDeleteVertexArrays(1, &quadVao1);
 	glDeleteProgram(program);
 
 	glfwTerminate();
