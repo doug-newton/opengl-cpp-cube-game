@@ -117,6 +117,12 @@ int main(int argc, char** argv) {
 		glfwPollEvents();
 	}
 
+	glDeleteVertexArrays(1, &vao);
+	glDeleteBuffers(1, &position_vbo);
+	glDeleteBuffers(1, &colour_vbo);
+	glDeleteBuffers(1, &ebo);
+	glDeleteProgram(program);
+
 	glfwTerminate();
 
 	return 0;
