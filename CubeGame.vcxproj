@@ -145,9 +145,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="gl_util.cpp" />
+    <ClCompile Include="south_african_flag\green_background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_util.h" />
+    <ClInclude Include="south_african_flag\south_african_flag.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>

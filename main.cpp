@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "south_african_flag/south_african_flag.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void process_input(GLFWwindow* window);
@@ -42,14 +43,18 @@ int main(int argc, char** argv) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	GLuint program = create_shader_program();
+	GLuint green_background_vao = green_background();
 
+	GLuint program = create_shader_program();
 	glUseProgram(program);
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glBindVertexArray(green_background_vao);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
