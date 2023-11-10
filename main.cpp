@@ -55,6 +55,8 @@ int main(int argc, char** argv) {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	glClearColor(0.5f, 0.25f, 0.0f, 1.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	GLuint program = create_shader_program();
 
@@ -66,10 +68,10 @@ int main(int argc, char** argv) {
 	};
 
 	GLfloat colours[] = {
-		0.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 1.0f,
-		1.0f, 0.0f, 1.0f,
+		0.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 0.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 0.0f,
+		1.0f, 0.0f, 1.0f, 0.0f,
 	};
 
 	GLuint vao;
@@ -89,7 +91,7 @@ int main(int argc, char** argv) {
 	glBindBuffer(GL_ARRAY_BUFFER, colour_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(colours), colours, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(1);
 
 	GLuint elements[] = {
