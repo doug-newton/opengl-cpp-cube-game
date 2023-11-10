@@ -27,6 +27,9 @@
     <ClCompile Include="south_african_flag\green_background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="south_african_flag\golden_triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
