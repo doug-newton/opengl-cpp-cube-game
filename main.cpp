@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "stb_image.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void process_input(GLFWwindow* window);
@@ -12,6 +13,7 @@ std::string read_all_lines(const char* source) noexcept(false);
 GLuint create_shader_program();
 bool checkShaderCompilation(GLuint shaderID);
 bool compile_and_attach_shader(GLuint programID, unsigned int type, const char* path);
+GLuint load_texture(std::string path);
 
 GLuint createQuadVao1() {
 	GLfloat positions[] = {
@@ -26,6 +28,13 @@ GLuint createQuadVao1() {
 		1.0f, 0.0f, 0.0f, 1.0f,
 		1.0f, 0.0f, 1.0f, 0.0f,
 		1.0f, 0.0f, 1.0f, 0.0f,
+	};
+
+	GLfloat texCoords[] = {
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		1.0f, 1.0f,
+		0.0f, 1.0f
 	};
 
 	GLuint vao;
@@ -47,6 +56,14 @@ GLuint createQuadVao1() {
 
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(1);
+
+	GLuint texture_vbo;
+	glGenBuffers(1, &texture_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(texCoords), texCoords, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(2);
 
 	GLuint elements[] = {
 		0, 1, 2,
@@ -154,8 +171,11 @@ int main(int argc, char** argv) {
 	GLuint program = create_shader_program();
 
 	GLuint quadVao1 = createQuadVao1();
+	GLuint container_texture = load_texture("container.jpg");
 
 	glUseProgram(program);
+
+	glBindTexture(GL_TEXTURE_2D, container_texture);
 
 	GLuint opacityLocation = glGetUniformLocation(program, "opacity");
 	glUniform1f(opacityLocation, 0.5f);
@@ -258,4 +278,31 @@ void process_input(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
+}
+
+GLuint load_texture(std::string path) {
+	unsigned int texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height, numChannels;
+	stbi_set_flip_vertically_on_load(1);
+	unsigned char* data = stbi_load(path.c_str(), &width, &height, &numChannels, 3);
+
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else {
+		std::cout << "failed to load texture" << std::endl;
+	}
+
+	stbi_image_free(data);
+
+	return texture;
 }
