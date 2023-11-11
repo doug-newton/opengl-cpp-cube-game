@@ -48,13 +48,17 @@ int main(int argc, char** argv) {
 	GLuint program = create_shader_program();
 	glUseProgram(program);
 
+	GLuint opacityLocation = glGetUniformLocation(program, "opacity");
+
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBindVertexArray(sa_flag_vao);
+		float opacity = sin(glfwGetTime()) / 2 + 0.5f;
+		glUniform1f(opacityLocation, opacity);
 
+		glBindVertexArray(sa_flag_vao);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLvoid*)0);
 
 		glfwSwapBuffers(window);
