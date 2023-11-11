@@ -157,10 +157,16 @@ int main(int argc, char** argv) {
 
 	glUseProgram(program);
 
+	GLuint opacityLocation = glGetUniformLocation(program, "opacity");
+	glUniform1f(opacityLocation, 0.5f);
+
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		float opacity = sin(glfwGetTime()) / 2 + 0.5f;
+		glUniform1f(opacityLocation, opacity);
 
 		glBindVertexArray(quadVao1);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
