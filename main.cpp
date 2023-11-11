@@ -122,18 +122,6 @@ GLuint createFanVao1() {
 	return vao;
 }
 
-GLuint createWuadVao2() {
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-
-}
-
 int main(int argc, char** argv) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
