@@ -10,3 +10,5 @@ GLuint white_top();
 GLuint white_bottom();
 GLuint red_top();
 GLuint blue_bottom();
+
+GLuint south_african_flag();

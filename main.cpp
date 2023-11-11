@@ -43,13 +43,7 @@ int main(int argc, char** argv) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	GLuint green_background_vao = green_background();
-	GLuint golden_triangle_vao = golden_triangle();
-	GLuint black_triangle_vao = black_triangle();
-	GLuint white_top_vao = white_top();
-	GLuint white_bottom_vao = white_bottom();
-	GLuint red_top_vao = red_top();
-	GLuint blue_bottom_vao = blue_bottom();
+	GLuint sa_flag_vao = south_african_flag();
 
 	GLuint program = create_shader_program();
 	glUseProgram(program);
@@ -59,26 +53,9 @@ int main(int argc, char** argv) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBindVertexArray(green_background_vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
+		glBindVertexArray(sa_flag_vao);
 
-		glBindVertexArray(golden_triangle_vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glBindVertexArray(black_triangle_vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glBindVertexArray(white_top_vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
-
-		glBindVertexArray(white_bottom_vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
-
-		glBindVertexArray(red_top_vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
-
-		glBindVertexArray(blue_bottom_vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLvoid*)0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
