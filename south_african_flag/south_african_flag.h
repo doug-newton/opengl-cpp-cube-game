@@ -8,3 +8,4 @@ GLuint golden_triangle();
 GLuint black_triangle();
 GLuint white_top();
 GLuint white_bottom();
+GLuint red_top();

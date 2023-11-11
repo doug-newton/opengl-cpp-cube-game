@@ -148,6 +148,7 @@
     <ClCompile Include="south_african_flag\black_triangle.cpp" />
     <ClCompile Include="south_african_flag\golden_triangle.cpp" />
     <ClCompile Include="south_african_flag\green_background.cpp" />
+    <ClCompile Include="south_african_flag\red_top.cpp" />
     <ClCompile Include="south_african_flag\white_bottom.cpp" />
     <ClCompile Include="south_african_flag\white_top.cpp" />
   </ItemGroup>
