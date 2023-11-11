@@ -9,3 +9,4 @@ GLuint black_triangle();
 GLuint white_top();
 GLuint white_bottom();
 GLuint red_top();
+GLuint blue_bottom();

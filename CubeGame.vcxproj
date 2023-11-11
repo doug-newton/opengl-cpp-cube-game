@@ -146,6 +146,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="gl_util.cpp" />
     <ClCompile Include="south_african_flag\black_triangle.cpp" />
+    <ClCompile Include="south_african_flag\blue_bottom.cpp" />
     <ClCompile Include="south_african_flag\golden_triangle.cpp" />
     <ClCompile Include="south_african_flag\green_background.cpp" />
     <ClCompile Include="south_african_flag\red_top.cpp" />

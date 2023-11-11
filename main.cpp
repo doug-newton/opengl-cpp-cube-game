@@ -49,6 +49,7 @@ int main(int argc, char** argv) {
 	GLuint white_top_vao = white_top();
 	GLuint white_bottom_vao = white_bottom();
 	GLuint red_top_vao = red_top();
+	GLuint blue_bottom_vao = blue_bottom();
 
 	GLuint program = create_shader_program();
 	glUseProgram(program);
@@ -74,6 +75,9 @@ int main(int argc, char** argv) {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
 
 		glBindVertexArray(red_top_vao);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
+
+		glBindVertexArray(blue_bottom_vao);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
 
 		glfwSwapBuffers(window);
