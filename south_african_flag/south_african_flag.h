@@ -6,3 +6,4 @@
 GLuint green_background();
 GLuint golden_triangle();
 GLuint black_triangle();
+GLuint white_top();
