@@ -154,8 +154,6 @@ int main(int argc, char** argv) {
 	GLuint program = create_shader_program();
 
 	GLuint quadVao1 = createQuadVao1();
-	GLuint triangleVao = createTriangleVao();
-	GLuint fan = createFanVao1();
 
 	glUseProgram(program);
 
@@ -166,12 +164,6 @@ int main(int argc, char** argv) {
 
 		glBindVertexArray(quadVao1);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
-
-		glBindVertexArray(triangleVao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glBindVertexArray(fan);
-		glDrawArrays(GL_TRIANGLE_FAN, 0, 8);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
