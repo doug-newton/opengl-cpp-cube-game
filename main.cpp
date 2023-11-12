@@ -172,21 +172,33 @@ int main(int argc, char** argv) {
 
 	GLuint quadVao1 = createQuadVao1();
 	GLuint container_texture = load_texture("container.jpg");
+	GLuint face_texture = load_texture("awesomeface.png");
 
 	glUseProgram(program);
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, face_texture);
+
+	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, container_texture);
 
+	GLuint texture_location_0 = glGetUniformLocation(program, "texture_slot0");
+	GLuint texture_location_1 = glGetUniformLocation(program, "texture_slot1");
+	glUniform1i(texture_location_0, 0); // set uniform to use slot 0 (face_texture)
+	glUniform1i(texture_location_1, 1); // set uniform to use slot 1 (container_texture)
+
 	GLuint opacityLocation = glGetUniformLocation(program, "opacity");
-	glUniform1f(opacityLocation, 0.5f);
+	glUniform1f(opacityLocation, 1.0f);
+
+	GLuint mix_amount_location = glGetUniformLocation(program, "mix_amount");
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		float opacity = sin(glfwGetTime()) / 2 + 0.5f;
-		glUniform1f(opacityLocation, opacity);
+		float mixAmount = sin(glfwGetTime()) / 2 + 0.5f;
+		glUniform1f(mix_amount_location, mixAmount);
 
 		glBindVertexArray(quadVao1);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
@@ -292,10 +304,10 @@ GLuint load_texture(std::string path) {
 
 	int width, height, numChannels;
 	stbi_set_flip_vertically_on_load(1);
-	unsigned char* data = stbi_load(path.c_str(), &width, &height, &numChannels, 3);
+	unsigned char* data = stbi_load(path.c_str(), &width, &height, &numChannels, 4);
 
 	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else {
