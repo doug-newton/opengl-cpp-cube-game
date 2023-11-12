@@ -20,6 +20,8 @@ private:
 
 	glm::vec3 position;
 
+	float rotationAmount;
+
 	int type;
 public:
 
@@ -27,5 +29,6 @@ public:
 
 	bool init();
 	void render();
+	void update(float deltaTime) override;
 
 };

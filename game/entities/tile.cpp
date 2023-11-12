@@ -26,5 +26,7 @@ void Tile::render() {
 	glm::mat4 transform = glm::mat4(1.0f);
 	transform = glm::translate(transform, position);
 	Renderer::instance().getTileShader()->setModel(transform);
+	glm::mat4 rotation_only = glm::mat4(1.0f);
+	Renderer::instance().getTileShader()->setRotationOnly(rotation_only);
 	glDrawElements(GL_TRIANGLES, vao.get()->getEboLength(), GL_UNSIGNED_INT, nullptr);
 }

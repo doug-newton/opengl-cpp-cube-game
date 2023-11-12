@@ -9,16 +9,19 @@ layout (location = 2) in vec2 aTexCoord;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat4 rotation;
 
 out vec3 fragPos;
 out vec3 normal;
 out vec2 texCoord;
+out mat4 transform;
 
 void main()
 {
-	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	transform = projection * view * model;
+	gl_Position = transform * vec4(aPos, 1.0);
 	fragPos = vec3(model * vec4(aPos, 1.0));
-	normal = aNormal;
+	normal = (rotation * vec4(aNormal, 1.0)).xyz;
 	texCoord = aTexCoord;
 };
 )glsl");
@@ -47,6 +50,7 @@ out vec4 FragColor;
 in vec3 fragPos;
 in vec3 normal;
 in vec2 texCoord;
+in mat4 transform;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;

@@ -19,6 +19,7 @@ TileShader::TileShader()
 	lightDiffuseLocation = glGetUniformLocation(this->id, "light.diffuse");
 	lightSpecularLocation = glGetUniformLocation(this->id, "light.specular");
 
+	rotationOnlyLocation = glGetUniformLocation(this->id, "rotation");
 	modelLocation = glGetUniformLocation(this->id, "model");
 	viewLocation = glGetUniformLocation(this->id, "view");
 	projectionLocation = glGetUniformLocation(this->id, "projection");
@@ -56,6 +57,10 @@ void TileShader::setLight(const ShaderLight& light) {
 
 void TileShader::setModel(const glm::mat4& model) {
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
+}
+
+void TileShader::setRotationOnly(const glm::mat4& rotationOnly) {
+	glUniformMatrix4fv(rotationOnlyLocation, 1, GL_FALSE, glm::value_ptr(rotationOnly));
 }
 
 void TileShader::setView(const glm::mat4& view) {

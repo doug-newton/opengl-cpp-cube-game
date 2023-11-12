@@ -27,6 +27,7 @@ public:
 	void setMaterial(const ShaderMaterial& material);
 	void setLight(const ShaderLight& light);
 	void setModel(const glm::mat4& model);
+	void setRotationOnly(const glm::mat4& rotationOnly);
 	void setView(const glm::mat4& view);
 	void setProjection(const glm::mat4& projection);
 	void setViewPos(const glm::vec3& viewPos);
@@ -48,6 +49,7 @@ private:
 	int lightDiffuseLocation;
 	int lightSpecularLocation;
 
+	int rotationOnlyLocation;
 	int modelLocation;
 	int viewLocation;
 	int projectionLocation;
