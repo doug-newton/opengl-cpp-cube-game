@@ -264,7 +264,7 @@ int main(int argc, char** argv) {
 
 	GLuint mix_amount_location = glGetUniformLocation(program, "mix_amount");
 
-	GLuint transform_location = glGetUniformLocation(program, "transform");
+	GLuint model_matrix = glGetUniformLocation(program, "model");
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
@@ -282,7 +282,7 @@ int main(int argc, char** argv) {
 		transform = glm::rotate(transform, glm::radians(rotationAmount), glm::vec3(0.0f, 1.0f, 1.0f));
 		transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 0.25f));
 
-		glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
+		glUniformMatrix4fv(model_matrix, 1, GL_FALSE, glm::value_ptr(transform));
 
 		glBindVertexArray(cube);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
