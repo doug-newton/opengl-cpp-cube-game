@@ -237,6 +237,8 @@ int main(int argc, char** argv) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	glEnable(GL_DEPTH_TEST);
+
 	GLuint program = create_shader_program();
 
 	GLuint quadVao1 = createQuadVao1();
@@ -267,7 +269,7 @@ int main(int argc, char** argv) {
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		float mixAmount = sin(glfwGetTime()) / 2 + 0.5f;
 		mixAmount = 1.0f;
