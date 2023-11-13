@@ -6,6 +6,9 @@
 #include <sstream>
 #include <vector>
 #include "stb_image.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void process_input(GLFWwindow* window);
@@ -192,12 +195,21 @@ int main(int argc, char** argv) {
 
 	GLuint mix_amount_location = glGetUniformLocation(program, "mix_amount");
 
+	glm::mat4 transform(1.0f);
+	transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
+	transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	//transform = glm::scale(transform, glm::vec3(1.25, 1.25f, 1.0f));
+
+	GLuint transform_location = glGetUniformLocation(program, "transform");
+	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
+
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		float mixAmount = sin(glfwGetTime()) / 2 + 0.5f;
+		mixAmount = 1.0f;
 		glUniform1f(mix_amount_location, mixAmount);
 
 		glBindVertexArray(quadVao1);
