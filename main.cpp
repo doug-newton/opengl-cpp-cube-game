@@ -18,7 +18,73 @@ bool checkShaderCompilation(GLuint shaderID);
 bool compile_and_attach_shader(GLuint programID, unsigned int type, const char* path);
 GLuint load_texture(std::string path);
 
+GLuint create_cube() {
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	float vertices[] = {
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	};
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+
+	glBindVertexArray(0);
+	return vao;
+
+}
+
 GLuint createQuadVao1() {
+
 	GLfloat positions[] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
@@ -176,6 +242,7 @@ int main(int argc, char** argv) {
 	GLuint quadVao1 = createQuadVao1();
 	GLuint container_texture = load_texture("container.jpg");
 	GLuint face_texture = load_texture("awesomeface.png");
+	GLuint cube = create_cube();
 
 	glUseProgram(program);
 
@@ -195,15 +262,7 @@ int main(int argc, char** argv) {
 
 	GLuint mix_amount_location = glGetUniformLocation(program, "mix_amount");
 
-	glm::mat4 transform(1.0f);
-	//	quad will first be scaled, then rotated, then translated
-	//	T x [R x [S x pos]]
-	transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
-	transform = glm::rotate(transform, glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 1.0f));
-
 	GLuint transform_location = glGetUniformLocation(program, "transform");
-	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
@@ -214,8 +273,17 @@ int main(int argc, char** argv) {
 		mixAmount = 1.0f;
 		glUniform1f(mix_amount_location, mixAmount);
 
-		glBindVertexArray(quadVao1);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (GLvoid*)0);
+		glm::mat4 transform(1.0f);
+		float rotationAmount = (float)sin(glfwGetTime()) * 60.0f;
+
+		transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
+		transform = glm::rotate(transform, glm::radians(rotationAmount), glm::vec3(0.0f, 1.0f, 1.0f));
+		transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 0.25f));
+
+		glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
+
+		glBindVertexArray(cube);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
