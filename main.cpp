@@ -21,5 +21,15 @@ int main(int argc, char** argv) {
 	glm::mat4 matrix(1.0f);
 	print("identity", matrix);
 
+	//	x -> x + 1
+	//	y -> y + 2
+	matrix = glm::translate(matrix, glm::vec3(1.0f, 2.0f, 0.0f));
+	print("translate", matrix);
+
+	//	x -> 2x + 1
+	//	y -> 2y + 2
+	matrix = glm::scale(matrix, glm::vec3(2.0f, 2.0f, 1.0f));
+	print("scale", matrix);
+
 	return 0;
 }
