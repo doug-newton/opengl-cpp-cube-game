@@ -148,7 +148,7 @@ int main(int argc, char** argv) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(600, 600, "OpenGL", NULL, NULL);
 
 	if (window == nullptr) {
 		std::cout << "failed to create window" << std::endl;
@@ -163,7 +163,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, 600, 600);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -196,9 +196,11 @@ int main(int argc, char** argv) {
 	GLuint mix_amount_location = glGetUniformLocation(program, "mix_amount");
 
 	glm::mat4 transform(1.0f);
+	//	quad will first be scaled, then rotated, then translated
+	//	T x [R x [S x pos]]
 	transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
-	transform = glm::rotate(transform, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	//transform = glm::scale(transform, glm::vec3(1.25, 1.25f, 1.0f));
+	transform = glm::rotate(transform, glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::scale(transform, glm::vec3(0.25f, 0.25f, 1.0f));
 
 	GLuint transform_location = glGetUniformLocation(program, "transform");
 	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
